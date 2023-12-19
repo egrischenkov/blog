@@ -1,0 +1,21 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+  exclude:
+    - "**.freezed.dart"
+    - "**.g.dart"
+    - "lib/assets/res/images.dart"
+    - "lib/assets/res/svg_icons.dart"
+    - "test/images_test.dart"
+    - "test/svg_icons_test.dart"
+
+linter:
+  rules:
+    use_string_buffers: true
+    prefer_single_quotes: true
+    await_only_futures: true
+    public_member_api_docs: true

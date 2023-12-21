@@ -8,8 +8,8 @@ analyzer:
   exclude:
     - "**.freezed.dart"
     - "**.g.dart"
-    - "lib/core/assets/images.dart"
-    - "lib/core/assets/svg_icons.dart"
+    - "lib/core/assets/res/images.dart"
+    - "lib/core/assets/res/svg_icons.dart"
     - "test/images_test.dart"
     - "test/svg_icons_test.dart"
 

@@ -1,22 +1,35 @@
 // ignore_for_file: public_member_api_docs
+import 'package:blog/core/assets/themes/theme_data.dart';
+import 'package:blog/core/assets/themes/theme_service/theme_service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  // TODO(egrischenkov): Need to inject this later.
+  final _themeService = ThemeService(ThemeMode.system);
+
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Placeholder(),
-      localizationsDelegates: _localizationsDelegates,
-      supportedLocales: _localizations,
+    return AnimatedBuilder(
+      animation: _themeService,
+      builder: (_, __) {
+        return MaterialApp(
+          home: const Placeholder(),
+          theme: AppThemeData.lightTheme,
+          darkTheme: AppThemeData.darkTheme,
+          themeMode: _themeService.currentThemeMode,
+          localizationsDelegates: _localizationsDelegates,
+          supportedLocales: _localizations,
+        );
+      },
     );
   }
 }

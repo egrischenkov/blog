@@ -32,3 +32,14 @@ flutter:
     - assets/icons/
     - assets/articles/
     - assets/images/
+    - assets/fonts/
+
+  fonts:
+    - family: SchibstedGrotesk
+      fonts:
+        - asset: assets/fonts/SchibstedGrotesk-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/SchibstedGrotesk-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/SchibstedGrotesk-Bold.ttf
+          weight: 700

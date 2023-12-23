@@ -19,3 +19,4 @@ linter:
     prefer_single_quotes: true
     await_only_futures: true
     public_member_api_docs: true
+    require_trailing_commas: true

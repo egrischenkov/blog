@@ -9,13 +9,15 @@ class ThemeService extends IThemeService {
   @override
   late ThemeMode currentThemeMode;
 
-  /// Creates instance of [ThemeService] with preferences type [IPreferencesService].
+  /// Creates instance of [ThemeService] with preferences - [IPreferencesService].
   ThemeService(this._preferencesService) {
     currentThemeMode = _getCurrentTheme();
   }
 
   @override
   Future<void> switchTheme() async {
+    if (currentThemeMode == ThemeMode.system) return;
+
     currentThemeMode = switch (currentThemeMode) {
       ThemeMode.light => ThemeMode.dark,
       _ => ThemeMode.light,

@@ -20,3 +20,4 @@ linter:
     await_only_futures: true
     public_member_api_docs: true
     require_trailing_commas: true
+    sort_pub_dependencies: true

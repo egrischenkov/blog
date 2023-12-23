@@ -2,9 +2,8 @@ import 'package:blog/core/common/services/preferences_service/i_preferences_serv
 import 'package:blog/core/common/services/preferences_service/preferences_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPreferencesMock extends Mock implements SharedPreferences {}
+import 'mocks/shared_preferences_mock.dart';
 
 const testString = 'test';
 

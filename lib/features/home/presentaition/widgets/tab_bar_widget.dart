@@ -1,5 +1,10 @@
-import 'package:blog/core/common/extensions/build_context_x.dart';
+import 'package:blog/core/assets/themes/color_theme/app_colors_theme.dart';
+import 'package:blog/core/assets/themes/text_theme/app_text_theme.dart';
+import 'package:blog/core/common/extensions/build_context_extension.dart';
+import 'package:blog/core/common/services/locale_service.dart/locale_code.dart';
+import 'package:blog/core/common/services/theme_service/theme_mode_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Tab bar.
 ///
@@ -12,7 +17,7 @@ class TabBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final textTheme = context.textTheme;
-    final colorTheme = context.colorTheme;
+    final colorsTheme = context.colorTheme;
 
     return Padding(
       padding: const EdgeInsets.all(16),
@@ -22,7 +27,7 @@ class TabBarWidget extends StatelessWidget {
           Expanded(
             child: Text(
               l10n.homeTitle,
-              style: textTheme.bold24.copyWith(color: colorTheme.onBackground),
+              style: textTheme.bold24.copyWith(color: colorsTheme.onBackground),
             ),
           ),
           const SizedBox(width: 16),
@@ -44,16 +49,88 @@ class TabBarWidget extends StatelessWidget {
               ),
               const SizedBox(width: 16),
               IconButton(
-                onPressed: () {},
+                onPressed: () => _showSettingsDialog(context, l10n, textTheme, colorsTheme),
                 icon: Icon(
                   Icons.settings,
-                  color: colorTheme.inactive,
+                  color: colorsTheme.inactive,
                 ),
               ),
             ],
           ),
         ],
       ),
+    );
+  }
+
+  void _showSettingsDialog(
+    BuildContext context,
+    AppLocalizations l10n,
+    AppTextTheme textTheme,
+    AppColorsTheme colorsTheme,
+  ) {
+    int selectedLanguageRadio = LocaleCode.values.map((l) => l.name).toList().indexOf(l10n.localeName);
+    // int selectedThemeRadio = ThemeMode.values.indexOf();
+    int selectedThemeRadio = 0;
+
+    showDialog<void>(
+      context: context,
+      builder: (_) {
+        return AlertDialog(
+          title: Text(
+            l10n.settingsTitle,
+            style: textTheme.bold22,
+            textAlign: TextAlign.center,
+          ),
+          content: StatefulBuilder(
+            builder: (_, setState) => Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(l10n.settingsAppearanceTitle, style: textTheme.bold16),
+                  Text(
+                    l10n.settingsAppearanceSubtitle,
+                    style: textTheme.regular11.copyWith(color: colorsTheme.inactive),
+                  ),
+                  Column(
+                    children: List.generate(ThemeMode.values.length, (index) {
+                      final themeMode = ThemeMode.values[index];
+
+                      return RadioListTile<int>(
+                        value: index,
+                        groupValue: selectedThemeRadio,
+                        onChanged: (value) {
+                          if (value != null) setState(() => selectedThemeRadio = value);
+                        },
+                        title: Text(themeMode.getTitle(l10n), style: textTheme.regular14),
+                      );
+                    }),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(l10n.settingsLanguageTitle, style: textTheme.bold16),
+                  Column(
+                    children: List<Widget>.generate(LocaleCode.values.length, (index) {
+                      final localeCode = LocaleCode.values[index];
+
+                      return RadioListTile<int>(
+                        value: index,
+                        groupValue: selectedLanguageRadio,
+                        onChanged: (value) {
+                          if (value != null) setState(() => selectedLanguageRadio = value);
+                        },
+                        title: Text(localeCode.getTitle(l10n), style: textTheme.regular14),
+                      );
+                    }),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

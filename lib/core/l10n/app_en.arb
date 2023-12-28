@@ -1,6 +1,23 @@
 {
+    "@segmentTabBar": {
+        "---------": "---------",
+        "description": "For TabBar"
+    },
     "homeTitle": "Egor Grischenkov's BLOG",
     "homeTabTitle": "HOME",
     "aboutTabTitle": "ABOUT",
-    "contentTabTitle": "CONTENT"
+    "contentTabTitle": "CONTENT",
+    "@segmentSettings": {
+        "---------": "---------",
+        "description": "For Settings"
+    },
+    "settingsTitle": "Settings",
+    "settingsAppearanceTitle": "Appearance",
+    "settingsAppearanceSubtitle": "Adjust the colors to reduce glare and give your eyes a break",
+    "settingsAppearanceSystemTheme": "Use System Theme",
+    "settingsAppearanceLightTheme": "Light Theme",
+    "settingsAppearanceDarkTheme": "Dark Theme",
+    "settingsLanguageTitle": "Language",
+    "settingsLanguageEnglish": "English",
+    "settingsLanguageRussian": "Russian"
 }

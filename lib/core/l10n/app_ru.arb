@@ -1,6 +1,23 @@
 {
+    "@segmentTabBar": {
+        "---------": "---------",
+        "description": "For TabBar"
+    },
     "homeTitle": "БЛОГ Егора Грищенкова",
     "homeTabTitle": "ГЛАВНАЯ",
     "aboutTabTitle": "ОБО МНЕ",
-    "contentTabTitle": "КОНТЕНТ"
+    "contentTabTitle": "КОНТЕНТ",
+    "@segmentSettings": {
+        "---------": "---------",
+        "description": "For Settings"
+    },
+    "settingsTitle": "Настройки",
+    "settingsAppearanceTitle": "Тема",
+    "settingsAppearanceSubtitle": "Регулируйте тему, чтобы уменьшить блики и дать глазам отдохнуть",
+    "settingsAppearanceSystemTheme": "Использовать системную тему",
+    "settingsAppearanceLightTheme": "Светлая тема",
+    "settingsAppearanceDarkTheme": "Темная тема",
+    "settingsLanguageTitle": "Язык",
+    "settingsLanguageEnglish": "Английский",
+    "settingsLanguageRussian": "Русский"
 }

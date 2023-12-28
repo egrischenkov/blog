@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Extension for convenient access to members available through [BuildContext].
-extension BuildContextX on BuildContext {
+extension BuildContextExtension on BuildContext {
   /// Access to [AppLocalizations]
   AppLocalizations get l10n => AppLocalizations.of(this)!;
 

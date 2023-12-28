@@ -1,4 +1,4 @@
-import 'package:blog/core/common/extensions/build_context_x.dart';
+import 'package:blog/core/common/extensions/build_context_extension.dart';
 import 'package:blog/features/home/presentaition/widgets/tab_bar_widget.dart';
 import 'package:flutter/material.dart';
 

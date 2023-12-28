@@ -35,32 +35,22 @@ void main() {
       expect(themeMode, ThemeMode.dark);
     });
 
-    test('Switches theme while system theme is currently selected.', () {
-      when(() => preferencesServiceMock.get<String>(PreferencesKey.theme)).thenReturn(null);
-      when(() => preferencesServiceMock.set(PreferencesKey.theme, any())).thenAnswer((_) => Future.value(true));
-      final themeService = ThemeService(preferencesServiceMock);
-
-      themeService.switchTheme();
-
-      expect(themeService.currentThemeMode, ThemeMode.system);
-    });
-
-    test('Switches theme while light theme is currently selected.', () {
+    test('Select dark theme while light theme is currently selected.', () {
       when(() => preferencesServiceMock.get<String>(PreferencesKey.theme)).thenReturn(lightTheme);
       when(() => preferencesServiceMock.set(PreferencesKey.theme, any())).thenAnswer((_) => Future.value(true));
       final themeService = ThemeService(preferencesServiceMock);
 
-      themeService.switchTheme();
+      themeService.selectTheme(ThemeMode.dark);
 
       expect(themeService.currentThemeMode, ThemeMode.dark);
     });
 
-    test('Switches theme while dark theme is currently selected.', () {
+    test('Select light theme while dark theme is currently selected.', () {
       when(() => preferencesServiceMock.get<String>(PreferencesKey.theme)).thenReturn(darkTheme);
       when(() => preferencesServiceMock.set(PreferencesKey.theme, any())).thenAnswer((_) => Future.value(true));
       final themeService = ThemeService(preferencesServiceMock);
 
-      themeService.switchTheme();
+      themeService.selectTheme(ThemeMode.light);
 
       expect(themeService.currentThemeMode, ThemeMode.light);
     });

@@ -15,13 +15,10 @@ class ThemeService extends IThemeService {
   }
 
   @override
-  Future<void> switchTheme() async {
-    if (currentThemeMode == ThemeMode.system) return;
+  Future<void> selectTheme(ThemeMode selectedThemeMode) async {
+    if (currentThemeMode == selectedThemeMode) return;
 
-    currentThemeMode = switch (currentThemeMode) {
-      ThemeMode.light => ThemeMode.dark,
-      _ => ThemeMode.light,
-    };
+    currentThemeMode = selectedThemeMode;
     await _preferencesService.set(PreferencesKey.theme, currentThemeMode.name);
 
     notifyListeners();

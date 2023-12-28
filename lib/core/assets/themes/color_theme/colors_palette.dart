@@ -19,7 +19,7 @@ abstract class ColorsPalette {
 
   /// Onyx
   ///
-  /// https://www.color-name.com/hex/32343c
+  /// https://www.color-name.com/hex/32343c]
   static const onyx = Color(0xFF32343C);
 
   /// Lotion

@@ -6,7 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 /// Extension for convenient access to members available through [BuildContext].
 extension BuildContextX on BuildContext {
   /// Access to [AppLocalizations]
-  AppLocalizations get localizations => AppLocalizations.of(this)!;
+  AppLocalizations get l10n => AppLocalizations.of(this)!;
 
   /// Access to [AppTextTheme] extension.
   AppTextTheme get textTheme => Theme.of(this).extension<AppTextTheme>()!;

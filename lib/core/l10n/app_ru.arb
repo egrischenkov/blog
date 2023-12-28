@@ -1,3 +1,6 @@
 {
-    "homeSection": "Home"
+    "homeTitle": "БЛОГ Егора Грищенкова",
+    "homeTabTitle": "ГЛАВНАЯ",
+    "aboutTabTitle": "ОБО МНЕ",
+    "contentTabTitle": "КОНТЕНТ"
 }

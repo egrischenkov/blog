@@ -1,5 +1,6 @@
 import 'package:blog/core/assets/themes/theme_data.dart';
 import 'package:blog/core/common/services/theme_service/i_theme_service.dart';
+import 'package:blog/features/home/presentaition/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -19,7 +20,8 @@ class App extends StatelessWidget {
         animation: themeService,
         builder: (_, __) {
           return MaterialApp(
-            home: const Placeholder(),
+            debugShowCheckedModeBanner: false,
+            home: const HomePage(),
             theme: AppThemeData.lightTheme,
             darkTheme: AppThemeData.darkTheme,
             themeMode: themeService.currentThemeMode,

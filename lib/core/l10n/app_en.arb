@@ -1,3 +1,6 @@
 {
-    "homeSection": "Home"
+    "homeTitle": "Egor Grischenkov's BLOG",
+    "homeTabTitle": "HOME",
+    "aboutTabTitle": "ABOUT",
+    "contentTabTitle": "CONTENT"
 }

@@ -64,6 +64,9 @@ final class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
   /// The color of the text on [danger].
   final Color onDanger;
 
+  /// Color of inactive or just grey items.
+  final Color inactive;
+
   /// Base light theme.
   const AppColorsTheme.light()
       : primary = ColorsPalette.violetsAreBlue,
@@ -77,7 +80,8 @@ final class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
         textBodyColor = ColorsPalette.onyx,
         textDisplayColor = ColorsPalette.onyx,
         danger = ColorsPalette.begonia,
-        onDanger = ColorsPalette.white;
+        onDanger = ColorsPalette.white,
+        inactive = ColorsPalette.coolGrey;
 
   /// Base dark theme.
   const AppColorsTheme.dark()
@@ -92,7 +96,8 @@ final class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
         textBodyColor = ColorsPalette.white,
         textDisplayColor = ColorsPalette.white,
         danger = ColorsPalette.begonia,
-        onDanger = ColorsPalette.white;
+        onDanger = ColorsPalette.white,
+        inactive = ColorsPalette.coolGrey;
 
   const AppColorsTheme._({
     required this.primary,
@@ -107,6 +112,7 @@ final class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
     required this.textDisplayColor,
     required this.danger,
     required this.onDanger,
+    required this.inactive,
   });
 
   @override
@@ -124,6 +130,7 @@ final class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
     Color? textDisplayColor,
     Color? danger,
     Color? onDanger,
+    Color? inactive,
   }) {
     return AppColorsTheme._(
       primary: primary ?? this.primary,
@@ -138,6 +145,7 @@ final class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
       textDisplayColor: textDisplayColor ?? this.textDisplayColor,
       danger: danger ?? this.danger,
       onDanger: onDanger ?? this.onDanger,
+      inactive: inactive ?? this.inactive,
     );
   }
 
@@ -163,6 +171,7 @@ final class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
       textDisplayColor: Color.lerp(textDisplayColor, other.textDisplayColor, t)!,
       danger: Color.lerp(danger, other.danger, t)!,
       onDanger: Color.lerp(onDanger, other.onDanger, t)!,
+      inactive: Color.lerp(inactive, other.inactive, t)!,
     );
   }
 }

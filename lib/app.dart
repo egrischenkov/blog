@@ -22,7 +22,7 @@ class App extends StatelessWidget {
         builder: (_, __) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: const HomePage(),
+            home: HomePage(),
             theme: AppThemeData.lightTheme,
             darkTheme: AppThemeData.darkTheme,
             themeMode: themeService.currentThemeMode,

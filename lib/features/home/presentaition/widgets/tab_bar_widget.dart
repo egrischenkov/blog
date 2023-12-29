@@ -12,6 +12,7 @@ class TabBarWidget extends StatelessWidget {
     final l10n = context.l10n;
     final textTheme = context.textTheme;
     final colorsTheme = context.colorTheme;
+    final cubit = context.read<HomeCubit>();
 
     return Padding(
       padding: const EdgeInsets.all(16),
@@ -43,7 +44,7 @@ class TabBarWidget extends StatelessWidget {
               ),
               const SizedBox(width: 16),
               IconButton(
-                onPressed: () => _showSettingsDialog(context, l10n, textTheme, colorsTheme),
+                onPressed: () => _showSettingsDialog(context, l10n, textTheme, colorsTheme, cubit),
                 icon: Icon(
                   Icons.settings,
                   color: colorsTheme.inactive,
@@ -61,10 +62,10 @@ class TabBarWidget extends StatelessWidget {
     AppLocalizations l10n,
     AppTextTheme textTheme,
     AppColorsTheme colorsTheme,
+    HomeCubit cubit,
   ) {
     int selectedLanguageRadio = LocaleCode.values.map((l) => l.name).toList().indexOf(l10n.localeName);
-    // int selectedThemeRadio = ThemeMode.values.indexOf();
-    int selectedThemeRadio = 0;
+    int selectedThemeRadio = ThemeMode.values.indexOf(cubit.currentThemeMode);
 
     showDialog<void>(
       context: context,
@@ -98,6 +99,7 @@ class TabBarWidget extends StatelessWidget {
                         groupValue: selectedThemeRadio,
                         onChanged: (value) {
                           if (value != null) setState(() => selectedThemeRadio = value);
+                          cubit.changeTheme(themeMode);
                         },
                         title: Text(themeMode.getTitle(l10n), style: textTheme.regular14),
                       );

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import 'mocks/preferences_service_mock.dart';
+import '../common_mocks/preferences_service_mock.dart';
 
 const darkTheme = 'dark';
 const lightTheme = 'light';
@@ -35,7 +35,7 @@ void main() {
       expect(themeMode, ThemeMode.dark);
     });
 
-    test('Select dark theme while light theme is currently selected.', () {
+    test('Selects dark theme while light theme is currently selected.', () {
       when(() => preferencesServiceMock.get<String>(PreferencesKey.theme)).thenReturn(lightTheme);
       when(() => preferencesServiceMock.set(PreferencesKey.theme, any())).thenAnswer((_) => Future.value(true));
       final themeService = ThemeService(preferencesServiceMock);
@@ -45,7 +45,7 @@ void main() {
       expect(themeService.currentThemeMode, ThemeMode.dark);
     });
 
-    test('Select light theme while dark theme is currently selected.', () {
+    test('Selects light theme while dark theme is currently selected.', () {
       when(() => preferencesServiceMock.get<String>(PreferencesKey.theme)).thenReturn(darkTheme);
       when(() => preferencesServiceMock.set(PreferencesKey.theme, any())).thenAnswer((_) => Future.value(true));
       final themeService = ThemeService(preferencesServiceMock);

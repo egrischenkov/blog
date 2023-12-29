@@ -30,7 +30,7 @@ final class LocaleService extends ILocaleService {
   }
 
   Locale _getCurrentLocale() {
-    final currentlocaleCode = _preferencesService.get<String>(PreferencesKey.theme, LocaleCode.en.name);
+    final currentlocaleCode = _preferencesService.get<String>(PreferencesKey.locale, LocaleCode.en.name);
     final isInitialLocaleSupported =
         LocaleCode.values.map((e) => e.name).contains(currentlocaleCode) && currentlocaleCode != null;
     return Locale(

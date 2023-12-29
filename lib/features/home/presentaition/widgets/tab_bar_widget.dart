@@ -1,10 +1,4 @@
-import 'package:blog/core/assets/themes/color_theme/app_colors_theme.dart';
-import 'package:blog/core/assets/themes/text_theme/app_text_theme.dart';
-import 'package:blog/core/common/extensions/build_context_extension.dart';
-import 'package:blog/core/common/services/locale_service.dart/locale_code.dart';
-import 'package:blog/core/common/services/theme_service/theme_mode_extension.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+part of 'package:blog/features/home/presentaition/home_page.dart';
 
 /// Tab bar.
 ///

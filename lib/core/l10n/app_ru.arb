@@ -3,7 +3,7 @@
         "---------": "---------",
         "description": "For TabBar"
     },
-    "homeTitle": "БЛОГ Егора Грищенкова",
+    "homeTitle": "Блог Егора Грищенкова",
     "homeTabTitle": "ГЛАВНАЯ",
     "aboutTabTitle": "ОБО МНЕ",
     "contentTabTitle": "КОНТЕНТ",
@@ -18,6 +18,6 @@
     "settingsAppearanceLightTheme": "Светлая тема",
     "settingsAppearanceDarkTheme": "Темная тема",
     "settingsLanguageTitle": "Язык",
-    "settingsLanguageEnglish": "Английский",
+    "settingsLanguageEnglish": "English",
     "settingsLanguageRussian": "Русский"
 }

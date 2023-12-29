@@ -1,4 +1,5 @@
 import 'package:blog/core/assets/themes/theme_data.dart';
+import 'package:blog/core/common/services/locale_service.dart/i_locale_service.dart';
 import 'package:blog/core/common/services/theme_service/i_theme_service.dart';
 import 'package:blog/features/home/presentaition/home_page.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +16,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<IThemeService>(
-      builder: (_, themeService, __) => AnimatedBuilder(
+    return Consumer2<IThemeService, ILocaleService>(
+      builder: (_, themeService, localeService, __) => AnimatedBuilder(
         animation: themeService,
         builder: (_, __) {
           return MaterialApp(
@@ -25,6 +26,7 @@ class App extends StatelessWidget {
             theme: AppThemeData.lightTheme,
             darkTheme: AppThemeData.darkTheme,
             themeMode: themeService.currentThemeMode,
+            locale: localeService.currentLocale,
             localizationsDelegates: _localizationsDelegates,
             supportedLocales: _localizations,
           );

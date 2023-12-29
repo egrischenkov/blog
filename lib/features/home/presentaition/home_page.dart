@@ -7,7 +7,6 @@ import 'package:blog/features/home/presentaition/bloc/home_cubit.dart';
 import 'package:blog/features/home/presentaition/di/create_home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 part 'package:blog/features/home/presentaition/widgets/tab_bar_widget.dart';
 
 /// Home page.

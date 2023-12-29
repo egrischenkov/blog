@@ -15,11 +15,11 @@ class ThemeService extends IThemeService {
   }
 
   @override
-  Future<void> selectTheme(ThemeMode selectedThemeMode) async {
+  void selectTheme(ThemeMode selectedThemeMode) {
     if (currentThemeMode == selectedThemeMode) return;
 
     currentThemeMode = selectedThemeMode;
-    await _preferencesService.set(PreferencesKey.theme, currentThemeMode.name);
+    _preferencesService.set(PreferencesKey.theme, currentThemeMode.name);
 
     notifyListeners();
   }

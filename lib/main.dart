@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:blog/app.dart';
+import 'package:blog/core/common/services/locale_service.dart/i_locale_service.dart';
+import 'package:blog/core/common/services/locale_service.dart/locale_service.dart';
 import 'package:blog/core/common/services/preferences_service/preferences_service.dart';
 import 'package:blog/core/common/services/theme_service/i_theme_service.dart';
 import 'package:blog/core/common/services/theme_service/theme_service.dart';
@@ -20,6 +22,7 @@ Future<void> main() async {
   List<SingleChildWidget> appScopeDependencies() {
     return [
       ChangeNotifierProvider<IThemeService>(create: (_) => ThemeService(preferences)),
+      ChangeNotifierProvider<ILocaleService>(create: (_) => LocaleService(preferences)),
     ];
   }
 

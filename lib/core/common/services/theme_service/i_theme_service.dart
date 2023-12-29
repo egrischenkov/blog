@@ -6,5 +6,5 @@ abstract class IThemeService with ChangeNotifier {
   abstract ThemeMode currentThemeMode;
 
   /// Method for switching theme.
-  Future<void> selectTheme(ThemeMode selectedThemeMode);
+  void selectTheme(ThemeMode selectedThemeMode);
 }

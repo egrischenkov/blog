@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:blog/core/common/services/locale_service.dart/i_locale_service.dart';
 import 'package:blog/core/common/services/theme_service/i_theme_service.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +9,10 @@ part 'home_state.dart';
 /// Cubit for HomePage.
 class HomeCubit extends Cubit<HomeState> {
   final IThemeService _themeService;
+  final ILocaleService _localeService;
 
   /// @nodoc
-  HomeCubit(this._themeService) : super(const HomeState()) {
+  HomeCubit(this._themeService, this._localeService) : super(const HomeState()) {
     _init();
   }
 
@@ -20,6 +22,11 @@ class HomeCubit extends Cubit<HomeState> {
   /// Changes theme.
   void changeTheme(ThemeMode selectedThemeMode) {
     _themeService.selectTheme(selectedThemeMode);
+  }
+
+  /// Changes locale.
+  void changeLocale(String selectedLocaleCode) {
+    _localeService.selectLocale(selectedLocaleCode);
   }
 
   Future<void> _init() async {}

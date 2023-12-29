@@ -44,7 +44,7 @@ class TabBarWidget extends StatelessWidget {
               ),
               const SizedBox(width: 16),
               IconButton(
-                onPressed: () => _showSettingsDialog(context, l10n, textTheme, colorsTheme, cubit),
+                onPressed: () => _showSettingsDialog(context, textTheme, colorsTheme, cubit, l10n.localeName),
                 icon: Icon(
                   Icons.settings,
                   color: colorsTheme.inactive,
@@ -59,72 +59,76 @@ class TabBarWidget extends StatelessWidget {
 
   void _showSettingsDialog(
     BuildContext context,
-    AppLocalizations l10n,
     AppTextTheme textTheme,
     AppColorsTheme colorsTheme,
     HomeCubit cubit,
+    String currentLocaleName,
   ) {
-    int selectedLanguageRadio = LocaleCode.values.map((l) => l.name).toList().indexOf(l10n.localeName);
+    int selectedLanguageRadio = LocaleCode.values.map((l) => l.name).toList().indexOf(currentLocaleName);
     int selectedThemeRadio = ThemeMode.values.indexOf(cubit.currentThemeMode);
 
     showDialog<void>(
       context: context,
       builder: (_) {
-        return AlertDialog(
-          title: Text(
-            l10n.settingsTitle,
-            style: textTheme.bold22,
-            textAlign: TextAlign.center,
-          ),
-          content: StatefulBuilder(
-            builder: (_, setState) => Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
+        return StatefulBuilder(
+          builder: (context, setState) {
+            final l10n = context.l10n;
+            return AlertDialog(
+              title: Text(
+                l10n.settingsTitle,
+                style: textTheme.bold22,
+                textAlign: TextAlign.center,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(l10n.settingsAppearanceTitle, style: textTheme.bold16),
-                  Text(
-                    l10n.settingsAppearanceSubtitle,
-                    style: textTheme.regular11.copyWith(color: colorsTheme.inactive),
-                  ),
-                  Column(
-                    children: List.generate(ThemeMode.values.length, (index) {
-                      final themeMode = ThemeMode.values[index];
+              content: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(l10n.settingsAppearanceTitle, style: textTheme.bold16),
+                    Text(
+                      l10n.settingsAppearanceSubtitle,
+                      style: textTheme.regular11.copyWith(color: colorsTheme.inactive),
+                    ),
+                    Column(
+                      children: List.generate(ThemeMode.values.length, (index) {
+                        final themeMode = ThemeMode.values[index];
 
-                      return RadioListTile<int>(
-                        value: index,
-                        groupValue: selectedThemeRadio,
-                        onChanged: (value) {
-                          if (value != null) setState(() => selectedThemeRadio = value);
-                          cubit.changeTheme(themeMode);
-                        },
-                        title: Text(themeMode.getTitle(l10n), style: textTheme.regular14),
-                      );
-                    }),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(l10n.settingsLanguageTitle, style: textTheme.bold16),
-                  Column(
-                    children: List<Widget>.generate(LocaleCode.values.length, (index) {
-                      final localeCode = LocaleCode.values[index];
+                        return RadioListTile<int>(
+                          value: index,
+                          groupValue: selectedThemeRadio,
+                          onChanged: (value) {
+                            if (value != null) setState(() => selectedThemeRadio = value);
+                            cubit.changeTheme(themeMode);
+                          },
+                          title: Text(themeMode.getTitle(l10n), style: textTheme.regular14),
+                        );
+                      }),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(l10n.settingsLanguageTitle, style: textTheme.bold16),
+                    Column(
+                      children: List<Widget>.generate(LocaleCode.values.length, (index) {
+                        final localeCode = LocaleCode.values[index];
 
-                      return RadioListTile<int>(
-                        value: index,
-                        groupValue: selectedLanguageRadio,
-                        onChanged: (value) {
-                          if (value != null) setState(() => selectedLanguageRadio = value);
-                        },
-                        title: Text(localeCode.getTitle(l10n), style: textTheme.regular14),
-                      );
-                    }),
-                  ),
-                ],
+                        return RadioListTile<int>(
+                          value: index,
+                          groupValue: selectedLanguageRadio,
+                          onChanged: (value) {
+                            if (value != null) setState(() => selectedLanguageRadio = value);
+                            cubit.changeLocale(localeCode.name);
+                          },
+                          title: Text(localeCode.getTitle(l10n), style: textTheme.regular14),
+                        );
+                      }),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ),
+            );
+          },
         );
       },
     );

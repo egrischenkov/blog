@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 abstract class ColorsPalette {
   /// White
   ///
-  /// https://www.color-name.com/hex/FFFFFF.
+  /// https://www.color-name.com/hex/FFFFFF
   static const Color white = Color(0xFFFFFFFF);
 
   ///  Violets Are Blue
@@ -54,6 +54,11 @@ abstract class ColorsPalette {
 
   /// Begonia
   ///
-  /// https://www.color-name.com/hex/F96D73.
+  /// https://www.color-name.com/hex/F96D73
   static const Color begonia = Color(0xFFF96D73);
+
+  /// Pale Chestnut
+  ///
+  /// https://www.color-name.com/hex/E0B3B3
+  static const Color paleChestnut = Color(0xFFE0B3B3);
 }

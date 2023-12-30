@@ -31,39 +31,42 @@ class HomeSectionWidget extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 164),
-                padding: const EdgeInsets.all(32),
-                decoration: BoxDecoration(
-                  color: colorsTheme.inactive.withOpacity(0.3),
-                  borderRadius: BorderRadius.circular(12),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 164),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(32),
+                  decoration: BoxDecoration(
+                    color: colorsTheme.inactive.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        l10n.homeSectionGreating,
+                        style: textTheme.bold22.copyWith(color: colorsTheme.accent),
+                      ),
+                      const SizedBox(height: 16),
+                      Text(l10n.homeSectionName, style: textTheme.bold24),
+                      const SizedBox(height: 8),
+                      Text(l10n.homeSectionSurname, style: textTheme.bold24),
+                      const SizedBox(height: 16),
+                      Text(
+                        l10n.homeSectionSelfDescription,
+                        style: textTheme.bold14.copyWith(color: colorsTheme.inactive),
+                      ),
+                    ],
+                  ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      l10n.homeSectionGreating,
-                      style: textTheme.bold22.copyWith(color: colorsTheme.accent),
-                    ),
-                    const SizedBox(height: 16),
-                    Text(l10n.homeSectionName, style: textTheme.bold24),
-                    const SizedBox(height: 8),
-                    Text(l10n.homeSectionSurname, style: textTheme.bold24),
-                    const SizedBox(height: 16),
-                    Text(
-                      l10n.homeSectionSelfDescription,
-                      style: textTheme.bold14.copyWith(color: colorsTheme.inactive),
-                    ),
-                  ],
-                ),
-              ),
-              const Spacer(),
-            ],
+                const Spacer(),
+                Image.asset(AppImages.imgAvatar),
+              ],
+            ),
           ),
         ],
       ),

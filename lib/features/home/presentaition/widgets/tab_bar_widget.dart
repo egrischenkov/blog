@@ -11,7 +11,7 @@ class TabBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final textTheme = context.textTheme;
-    final colorsTheme = context.colorTheme;
+    final colorsTheme = context.colorsTheme;
     final cubit = context.read<HomeCubit>();
 
     return Padding(
@@ -174,7 +174,7 @@ class _TabItemState extends State<_TabItem> with SingleTickerProviderStateMixin 
   @override
   Widget build(BuildContext context) {
     final textTheme = context.textTheme;
-    final colorTheme = context.colorTheme;
+    final colorTheme = context.colorsTheme;
     final tabStyle = textTheme.bold14.copyWith(color: colorTheme.onBackground);
 
     return Stack(

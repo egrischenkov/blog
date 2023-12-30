@@ -19,5 +19,13 @@
     "settingsAppearanceDarkTheme": "Темная тема",
     "settingsLanguageTitle": "Язык",
     "settingsLanguageEnglish": "English",
-    "settingsLanguageRussian": "Русский"
+    "settingsLanguageRussian": "Русский",
+    "@segmentHomeSection": {
+        "---------": "---------",
+        "description": "For Home Section"
+    },
+    "homeSectionGreating": "Йоу, я -",
+    "homeSectionName": "Егор",
+    "homeSectionSurname": "Грищенков",
+    "homeSectionSelfDescription": "Любитель Flutter и страстный ценитель боевых искусств"
 }

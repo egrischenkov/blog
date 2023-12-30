@@ -67,6 +67,9 @@ final class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
   /// Color of inactive or just grey items.
   final Color inactive;
 
+  /// Color for accent details.
+  final Color accent;
+
   /// Base light theme.
   const AppColorsTheme.light()
       : primary = ColorsPalette.violetsAreBlue,
@@ -81,7 +84,8 @@ final class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
         textDisplayColor = ColorsPalette.onyx,
         danger = ColorsPalette.begonia,
         onDanger = ColorsPalette.white,
-        inactive = ColorsPalette.coolGrey;
+        inactive = ColorsPalette.coolGrey,
+        accent = ColorsPalette.violetsAreBlue;
 
   /// Base dark theme.
   const AppColorsTheme.dark()
@@ -97,7 +101,8 @@ final class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
         textDisplayColor = ColorsPalette.white,
         danger = ColorsPalette.begonia,
         onDanger = ColorsPalette.white,
-        inactive = ColorsPalette.coolGrey;
+        inactive = ColorsPalette.coolGrey,
+        accent = ColorsPalette.violetsAreBlue;
 
   const AppColorsTheme._({
     required this.primary,
@@ -113,6 +118,7 @@ final class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
     required this.danger,
     required this.onDanger,
     required this.inactive,
+    required this.accent,
   });
 
   @override
@@ -131,6 +137,7 @@ final class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
     Color? danger,
     Color? onDanger,
     Color? inactive,
+    Color? accent,
   }) {
     return AppColorsTheme._(
       primary: primary ?? this.primary,
@@ -146,6 +153,7 @@ final class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
       danger: danger ?? this.danger,
       onDanger: onDanger ?? this.onDanger,
       inactive: inactive ?? this.inactive,
+      accent: accent ?? this.accent,
     );
   }
 
@@ -172,6 +180,7 @@ final class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
       danger: Color.lerp(danger, other.danger, t)!,
       onDanger: Color.lerp(onDanger, other.onDanger, t)!,
       inactive: Color.lerp(inactive, other.inactive, t)!,
+      accent: Color.lerp(accent, other.accent, t)!,
     );
   }
 }

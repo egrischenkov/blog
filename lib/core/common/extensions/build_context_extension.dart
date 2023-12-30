@@ -12,5 +12,5 @@ extension BuildContextExtension on BuildContext {
   AppTextTheme get textTheme => Theme.of(this).extension<AppTextTheme>()!;
 
   /// Access to [AppColorsTheme] extension.
-  AppColorsTheme get colorTheme => Theme.of(this).extension<AppColorsTheme>()!;
+  AppColorsTheme get colorsTheme => Theme.of(this).extension<AppColorsTheme>()!;
 }

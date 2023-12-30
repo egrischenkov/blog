@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorTheme = context.colorTheme;
+    final colorTheme = context.colorsTheme;
     final size = MediaQuery.of(context).size;
 
     return Scaffold(

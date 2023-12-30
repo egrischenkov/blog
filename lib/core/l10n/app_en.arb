@@ -19,5 +19,13 @@
     "settingsAppearanceDarkTheme": "Dark Theme",
     "settingsLanguageTitle": "Language",
     "settingsLanguageEnglish": "English",
-    "settingsLanguageRussian": "Русский"
+    "settingsLanguageRussian": "Русский",
+    "@segmentHomeSection": {
+        "---------": "---------",
+        "description": "For Home Section"
+    },
+    "homeSectionGreating": "HELLO, I'M",
+    "homeSectionName": "EGOR",
+    "homeSectionSurname": "GRISCHENKOV",
+    "homeSectionSelfDescription": "Flutter enthusiast and passionate martial arts aficionado"
 }

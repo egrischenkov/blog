@@ -1,3 +1,4 @@
+import 'package:blog/core/assets/res/resources.dart';
 import 'package:blog/core/assets/themes/color_theme/app_colors_theme.dart';
 import 'package:blog/core/assets/themes/text_theme/app_text_theme.dart';
 import 'package:blog/core/common/extensions/build_context_extension.dart';
@@ -43,6 +44,7 @@ class HomePage extends StatelessWidget {
           child: CustomScrollView(
             slivers: [
               SliverAppBar(
+                forceElevated: true,
                 floating: true,
                 backgroundColor: colorTheme.background,
                 elevation: 5,

@@ -16,22 +16,19 @@ class HomeSectionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300,
+      height: 500,
       child: Stack(
         alignment: Alignment.center,
         children: [
           Transform(
             transform: Matrix4.translationValues(_parallaxOffsetX, _parallaxOffsetY, 0),
-            child: Image.network(
-              'https://i0.wp.com/www.pixcores.com/wp-content/uploads/2023/03/image-9.webp?w=1214&ssl=1',
+            child: Image.asset(
+              AppImages.imgHomeBackground,
               fit: BoxFit.cover,
-              width: double.infinity,
             ),
           ),
           Center(
             child: Container(
-              // width: 200.0,
-              height: 200.0,
               color: Colors.transparent,
               child: const Center(
                 child: Text(

@@ -4,5 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:blog/core/assets/res//resources.dart';
 
 void main() {
-  test('images assets test', () {});
+  test('images assets test', () {
+    expect(File(AppImages.imgHomeBackground).existsSync(), isTrue);
+  });
 }

@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'package:blog/features/home/presentaition/widgets/tab_bar_widget.dart';
 part 'package:blog/features/home/presentaition/widgets/home_section_widget.dart';
+part 'package:blog/features/home/presentaition/widgets/about_section_widget.dart';
 
 /// Typedef for parallax offset.
 typedef ParallaxOffset = (double, double);
@@ -65,6 +66,7 @@ class HomePage extends StatelessWidget {
                   },
                 ),
               ),
+              const SliverToBoxAdapter(child: AboutSectionWidget()),
             ],
           ),
         ),

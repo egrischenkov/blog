@@ -27,5 +27,15 @@
     "homeSectionGreating": "HELLO, I'M",
     "homeSectionName": "EGOR",
     "homeSectionSurname": "GRISCHENKOV",
-    "homeSectionSelfDescription": "Flutter enthusiast and passionate martial arts aficionado"
+    "homeSectionSelfDescription": "Flutter enthusiast and passionate martial arts aficionado",
+    "@segmentAboutSection": {
+        "---------": "---------",
+        "description": "For About Section"
+    },
+    "aboutSectionTitle": "About me",
+    "aboutSectionGreetings": "Welcome to my blog, dear readers!",
+    "aboutSectionMyself": "My name is Egor Grischenkov, a Flutter developer with three years of experience and a passion for creating innovative mobile applications.",
+    "aboutSectionWork": "My journey in the development world has taken me through two fascinating companies - WhisperArts and Surf.\nAt WhisperArts, I delved into building projects from the ground up, gaining valuable experience in the full development cycle. However, a particularly noteworthy chapter was my time at Surf. Here, I not only worked on projects but also shared my knowledge with students through a Flutter development course. Reviewing homework assignments and conducting code reviews became integral parts of my role.",
+    "aboutSectionHobby": "Outside of work, I am passionately involved in martial arts and fishing. In the world of technology, I am drawn not only to practical aspects but also to the opportunity to share knowledge. My love for writing articles on technical topics has become another way for me to express myself in this information space.",
+    "aboutSectionEnding": "My life philosophy is infused with stoicism, and I strive to adhere to its principles in all aspects of my activities. In this blog, I intend to share my experiences, knowledge, and inspiration, hoping to encourage you to embark on your own creative endeavors in the development world. Thank you for joining me on this exciting journey!"
 }

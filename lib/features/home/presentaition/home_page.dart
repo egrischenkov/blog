@@ -30,6 +30,9 @@ class HomePage extends StatelessWidget {
     final colorTheme = context.colorsTheme;
     final size = MediaQuery.of(context).size;
 
+    final homeKey = GlobalKey();
+    final aboutKey = GlobalKey();
+
     return Scaffold(
       backgroundColor: colorTheme.secondary,
       body: BlocProvider(
@@ -50,12 +53,16 @@ class HomePage extends StatelessWidget {
                 backgroundColor: colorTheme.background,
                 elevation: 5,
                 expandedHeight: 150,
-                flexibleSpace: const FlexibleSpaceBar(
+                flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
-                  title: TabBarWidget(),
+                  title: TabBarWidget(
+                    homeKey: homeKey,
+                    aboutKey: aboutKey,
+                  ),
                 ),
               ),
               SliverToBoxAdapter(
+                key: homeKey,
                 child: ValueListenableBuilder<ParallaxOffset>(
                   valueListenable: _parallaxOffset,
                   builder: (_, offset, __) {
@@ -66,7 +73,7 @@ class HomePage extends StatelessWidget {
                   },
                 ),
               ),
-              const SliverToBoxAdapter(child: AboutSectionWidget()),
+              SliverToBoxAdapter(key: aboutKey, child: const AboutSectionWidget()),
             ],
           ),
         ),

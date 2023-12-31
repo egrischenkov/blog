@@ -5,7 +5,17 @@ part of 'package:blog/features/home/presentaition/home_page.dart';
 /// Manages app navigation.
 class TabBarWidget extends StatelessWidget {
   /// @nodoc
-  const TabBarWidget({super.key});
+  final GlobalKey homeKey;
+
+  /// @nodoc
+  final GlobalKey aboutKey;
+
+  /// @nodoc
+  const TabBarWidget({
+    required this.homeKey,
+    required this.aboutKey,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +39,12 @@ class TabBarWidget extends StatelessWidget {
           Row(
             children: [
               _TabItem(
-                onTap: () {},
+                onTap: () => _scrollToItem(homeKey),
                 title: l10n.homeTabTitle,
               ),
               const SizedBox(width: 16),
               _TabItem(
-                onTap: () {},
+                onTap: () => _scrollToItem(aboutKey),
                 title: l10n.aboutTabTitle,
               ),
               const SizedBox(width: 16),
@@ -54,6 +64,16 @@ class TabBarWidget extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  void _scrollToItem(GlobalKey itemKey) {
+    final currentContext = itemKey.currentContext;
+    if (currentContext == null) return;
+    Scrollable.ensureVisible(
+      currentContext,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
     );
   }
 

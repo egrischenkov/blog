@@ -29,7 +29,7 @@ class AboutSectionWidget extends StatelessWidget {
               const SizedBox(height: 16),
               Text(l10n.aboutSectionHobby, style: textTheme.bold18.copyWith(color: colorsTheme.inactive)),
               const SizedBox(height: 16),
-              Text(l10n.aboutSectionWork, style: textTheme.bold18.copyWith(color: colorsTheme.inactive)),
+              Text(l10n.aboutSectionEnding, style: textTheme.bold18.copyWith(color: colorsTheme.inactive)),
             ],
           ),
         ),

@@ -8,11 +8,15 @@ class TabBarWidget extends StatelessWidget {
   final GlobalKey homeKey;
 
   /// @nodoc
+  final GlobalKey contentKey;
+
+  /// @nodoc
   final GlobalKey aboutKey;
 
   /// @nodoc
   const TabBarWidget({
     required this.homeKey,
+    required this.contentKey,
     required this.aboutKey,
     super.key,
   });
@@ -44,13 +48,13 @@ class TabBarWidget extends StatelessWidget {
               ),
               const SizedBox(width: 16),
               _TabItem(
-                onTap: () => _scrollToItem(aboutKey),
-                title: l10n.aboutTabTitle,
+                onTap: () => _scrollToItem(contentKey),
+                title: l10n.contentTabTitle,
               ),
               const SizedBox(width: 16),
               _TabItem(
-                onTap: () {},
-                title: l10n.contentTabTitle,
+                onTap: () => _scrollToItem(aboutKey),
+                title: l10n.aboutTabTitle,
               ),
               const SizedBox(width: 16),
               IconButton(

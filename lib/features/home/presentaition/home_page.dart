@@ -12,9 +12,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'package:blog/features/home/presentaition/widgets/tab_bar_widget.dart';
 part 'package:blog/features/home/presentaition/widgets/home_section_widget.dart';
 part 'package:blog/features/home/presentaition/widgets/about_section_widget.dart';
+part 'package:blog/features/home/presentaition/widgets/articles_section_widget.dart';
 
 /// Typedef for parallax offset.
 typedef ParallaxOffset = (double, double);
+
+/// Key for [HomeSectionWidget].
+final _homeKey = GlobalKey();
+
+/// Key for [ArticlesSectionWidget].
+final _contentKey = GlobalKey();
+
+/// Key for [AboutSectionWidget].
+final _aboutKey = GlobalKey();
 
 /// Home page.
 ///
@@ -29,9 +39,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorTheme = context.colorsTheme;
     final size = MediaQuery.of(context).size;
-
-    final homeKey = GlobalKey();
-    final aboutKey = GlobalKey();
 
     return Scaffold(
       backgroundColor: colorTheme.secondary,
@@ -56,13 +63,14 @@ class HomePage extends StatelessWidget {
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
                   title: TabBarWidget(
-                    homeKey: homeKey,
-                    aboutKey: aboutKey,
+                    homeKey: _homeKey,
+                    contentKey: _contentKey,
+                    aboutKey: _aboutKey,
                   ),
                 ),
               ),
               SliverToBoxAdapter(
-                key: homeKey,
+                key: _homeKey,
                 child: ValueListenableBuilder<ParallaxOffset>(
                   valueListenable: _parallaxOffset,
                   builder: (_, offset, __) {
@@ -73,7 +81,8 @@ class HomePage extends StatelessWidget {
                   },
                 ),
               ),
-              SliverToBoxAdapter(key: aboutKey, child: const AboutSectionWidget()),
+              SliverToBoxAdapter(key: _contentKey, child: const ArticlesSectionWidget()),
+              SliverToBoxAdapter(key: _aboutKey, child: const AboutSectionWidget()),
             ],
           ),
         ),

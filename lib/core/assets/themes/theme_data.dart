@@ -32,6 +32,10 @@ abstract final class AppThemeData {
         color: _lightColorScheme.onPrimary,
       ),
     ),
+    dividerTheme: DividerThemeData(
+      color: _lightColorScheme.inactive,
+      thickness: 2,
+    ),
     scaffoldBackgroundColor: _lightColorScheme.background,
     extensions: [_lightColorScheme, _textTheme],
   );
@@ -61,6 +65,10 @@ abstract final class AppThemeData {
       iconTheme: IconThemeData(
         color: _darkColorScheme.onPrimary,
       ),
+    ),
+    dividerTheme: DividerThemeData(
+      color: _darkColorScheme.inactive,
+      thickness: 2,
     ),
     scaffoldBackgroundColor: _darkColorScheme.background,
     extensions: [_darkColorScheme, _textTheme],

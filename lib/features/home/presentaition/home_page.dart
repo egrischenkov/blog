@@ -1,4 +1,5 @@
 import 'package:blog/core/assets/res/resources.dart';
+import 'package:blog/core/common/widgets/footer_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:blog/core/assets/themes/color_theme/app_colors_theme.dart';
 import 'package:blog/core/assets/themes/text_theme/app_text_theme.dart';
@@ -85,6 +86,7 @@ class HomePage extends StatelessWidget {
               ),
               SliverToBoxAdapter(key: _contentKey, child: const ArticlesSectionWidget()),
               SliverToBoxAdapter(key: _aboutKey, child: const AboutSectionWidget()),
+              const SliverToBoxAdapter(child: FooterWidget()),
             ],
           ),
         ),

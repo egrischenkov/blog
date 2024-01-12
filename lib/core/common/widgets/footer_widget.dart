@@ -6,16 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-/// Github link.
 const _githubUrl = 'https://github.com/egrischenkov';
-
-/// Telegram link.
 const _tgUrl = 'https://t.me/egrischenkov';
-
-/// LinkedIn link.
 const _linkedinUrl = 'https://www.linkedin.com/in/egor-grishchenkov-424ab3282/';
-
-/// VK link.
 const _vkUrl = 'https://vk.com/id802661280';
 
 /// Site's footer.

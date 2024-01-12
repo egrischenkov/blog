@@ -40,11 +40,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorTheme = context.colorsTheme;
+    final colorsTheme = context.colorsTheme;
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: colorTheme.secondary,
+      backgroundColor: colorsTheme.secondary,
       body: BlocProvider(
         create: createHomeCubit,
         child: MouseRegion(
@@ -60,7 +60,7 @@ class HomePage extends StatelessWidget {
               SliverAppBar(
                 forceElevated: true,
                 floating: true,
-                backgroundColor: colorTheme.background,
+                backgroundColor: colorsTheme.background,
                 elevation: 5,
                 expandedHeight: 150,
                 flexibleSpace: FlexibleSpaceBar(

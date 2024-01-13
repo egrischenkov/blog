@@ -54,36 +54,47 @@ class _ArticleWidgetState extends State<_ArticleWidget> {
     return MouseRegion(
       onHover: (_) => _handleHover(hover: true),
       onExit: (_) => _handleHover(hover: false),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 100),
-        transform: Matrix4.translationValues(0, isHovered ? -8 : 0, 0),
-        height: 500,
-        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
-        decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage(_articleEntity.linkToAssets), fit: BoxFit.cover),
-          borderRadius: BorderRadius.circular(32),
+      child: GestureDetector(
+        onTap: () => _navigateToArticlePage(widget.articleEntity),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 100),
+          transform: Matrix4.translationValues(0, isHovered ? -8 : 0, 0),
+          height: 500,
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
+          decoration: BoxDecoration(
+            image: DecorationImage(image: AssetImage(_articleEntity.imagePath), fit: BoxFit.cover),
+            borderRadius: BorderRadius.circular(32),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                _articleEntity.title,
+                style: textTheme.bold24.copyWith(color: colorsScheme.onPrimary),
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 24),
+              Text(
+                _formatArticleCreationDate(_articleEntity.createdAt, l10n),
+                style: textTheme.bold16.copyWith(color: colorsScheme.onPrimary),
+              ),
+              const Spacer(),
+              Text(
+                _articleEntity.topic,
+                style: textTheme.bold16.copyWith(color: colorsScheme.onPrimary),
+              ),
+            ],
+          ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              _articleEntity.title,
-              style: textTheme.bold24.copyWith(color: colorsScheme.onPrimary),
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-            ),
-            const SizedBox(height: 24),
-            Text(
-              _formatArticleCreationDate(_articleEntity.createdAt, l10n),
-              style: textTheme.bold16.copyWith(color: colorsScheme.onPrimary),
-            ),
-            const Spacer(),
-            Text(
-              _articleEntity.topic,
-              style: textTheme.bold16.copyWith(color: colorsScheme.onPrimary),
-            ),
-          ],
-        ),
+      ),
+    );
+  }
+
+  void _navigateToArticlePage(ArticleEntity articleEntity) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => ArticlePage(articleEntity: articleEntity),
       ),
     );
   }
@@ -122,61 +133,71 @@ final mockItems = [
   ArticleEntity(
     title: 'About something very very interesting',
     topic: 'programming',
-    linkToAssets: AppImages.imgArticlePlaceholder,
+    imagePath: AppImages.imgArticlePlaceholder,
     createdAt: DateTime(DateTime.now().year - 1, DateTime.now().month, DateTime.now().day),
+    articleInMarkdown: 'assets/articles/null_in_dart.md',
   ),
   ArticleEntity(
     title: 'How to write clean code',
     topic: 'programming',
-    linkToAssets: AppImages.imgArticlePlaceholder,
+    imagePath: AppImages.imgArticlePlaceholder,
     createdAt: DateTime(DateTime.now().year, DateTime.now().month - 1, DateTime.now().day),
+    articleInMarkdown: 'assets/articles/null_in_dart.md',
   ),
   ArticleEntity(
     title: 'How to write tests',
     topic: 'programming',
-    linkToAssets: AppImages.imgArticlePlaceholder,
+    imagePath: AppImages.imgArticlePlaceholder,
     createdAt: DateTime.now(),
+    articleInMarkdown: 'assets/articles/null_in_dart.md',
   ),
   ArticleEntity(
     title: 'How to earn much money',
     topic: 'programming',
-    linkToAssets: AppImages.imgArticlePlaceholder,
+    imagePath: AppImages.imgArticlePlaceholder,
     createdAt: DateTime.now(),
+    articleInMarkdown: 'assets/articles/null_in_dart.md',
   ),
   ArticleEntity(
     title: 'How to earn much money',
     topic: 'programming',
-    linkToAssets: AppImages.imgArticlePlaceholder,
+    imagePath: AppImages.imgArticlePlaceholder,
     createdAt: DateTime.now(),
+    articleInMarkdown: 'assets/articles/null_in_dart.md',
   ),
   ArticleEntity(
     title: 'How to earn much money',
     topic: 'programming',
-    linkToAssets: AppImages.imgArticlePlaceholder,
+    imagePath: AppImages.imgArticlePlaceholder,
     createdAt: DateTime.now(),
+    articleInMarkdown: 'assets/articles/null_in_dart.md',
   ),
   ArticleEntity(
     title: 'How to earn much money',
     topic: 'programming',
-    linkToAssets: AppImages.imgArticlePlaceholder,
+    imagePath: AppImages.imgArticlePlaceholder,
     createdAt: DateTime.now(),
+    articleInMarkdown: 'assets/articles/null_in_dart.md',
   ),
   ArticleEntity(
     title: 'How to earn much money',
     topic: 'programming',
-    linkToAssets: AppImages.imgArticlePlaceholder,
+    imagePath: AppImages.imgArticlePlaceholder,
     createdAt: DateTime.now(),
+    articleInMarkdown: 'assets/articles/null_in_dart.md',
   ),
   ArticleEntity(
     title: 'How to earn much money',
     topic: 'programming',
-    linkToAssets: AppImages.imgArticlePlaceholder,
+    imagePath: AppImages.imgArticlePlaceholder,
     createdAt: DateTime.now(),
+    articleInMarkdown: 'assets/articles/null_in_dart.md',
   ),
   ArticleEntity(
     title: 'How to earn much money',
     topic: 'programming',
-    linkToAssets: AppImages.imgArticlePlaceholder,
+    imagePath: AppImages.imgArticlePlaceholder,
     createdAt: DateTime.now(),
+    articleInMarkdown: 'assets/articles/null_in_dart.md',
   ),
 ];

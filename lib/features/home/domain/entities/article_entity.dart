@@ -9,7 +9,8 @@ class ArticleEntity with _$ArticleEntity {
   const factory ArticleEntity({
     required String title,
     required String topic,
-    required String linkToAssets,
+    required String articleInMarkdown,
+    required String imagePath,
     // TODO(egrischenkov): String representation must be as: '2002-02-27'.
     required DateTime createdAt,
   }) = _ArticleEntity;

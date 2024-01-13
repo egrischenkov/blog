@@ -1,5 +1,6 @@
 import 'package:blog/core/assets/res/resources.dart';
 import 'package:blog/core/common/widgets/footer_widget.dart';
+import 'package:blog/features/articles/presentation/article_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:blog/core/assets/themes/color_theme/app_colors_theme.dart';
 import 'package:blog/core/assets/themes/text_theme/app_text_theme.dart';

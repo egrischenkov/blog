@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:blog/core/common/services/locale_service.dart/i_locale_service.dart';
 import 'package:blog/core/common/services/theme_service/i_theme_service.dart';
+import 'package:blog/features/home/domain/repositories/i_home_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
@@ -10,9 +11,15 @@ part 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   final IThemeService _themeService;
   final ILocaleService _localeService;
+  // ignore: unused_field
+  final IHomeRepository _homeRepository;
 
   /// @nodoc
-  HomeCubit(this._themeService, this._localeService) : super(const HomeState()) {
+  HomeCubit(
+    this._themeService,
+    this._localeService,
+    this._homeRepository,
+  ) : super(const HomeState()) {
     _init();
   }
 

@@ -67,7 +67,6 @@ class HomePage extends StatelessWidget {
                 elevation: 5,
                 expandedHeight: 150,
                 flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: true,
                   title: TabBarWidget(
                     homeKey: _homeKey,
                     contentKey: _contentKey,

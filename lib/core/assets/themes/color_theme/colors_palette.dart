@@ -47,6 +47,11 @@ abstract class ColorsPalette {
   /// https://www.color-name.com/hex/e8e8ea
   static const brightGrey = Color(0xFFE8E8EA);
 
+  /// Second Bright Gray
+  ///
+  /// https://www.color-name.com/hex/EBEBF4
+  static const secondBrightGrey = Color(0xFFEBEBF4);
+
   /// Palatinate Blue
   ///
   /// https://www.color-name.com/hex/2838fc
@@ -55,10 +60,25 @@ abstract class ColorsPalette {
   /// Begonia
   ///
   /// https://www.color-name.com/hex/F96D73
-  static const Color begonia = Color(0xFFF96D73);
+  static const begonia = Color(0xFFF96D73);
 
   /// Pale Chestnut
   ///
   /// https://www.color-name.com/hex/E0B3B3
-  static const Color paleChestnut = Color(0xFFE0B3B3);
+  static const paleChestnut = Color(0xFFE0B3B3);
+
+  /// Cultured
+  ///
+  /// https://www.color-name.com/hex/F4F4F4
+  static const cultured = Color(0xFFF4F4F4);
+
+  /// Charcoal
+  ///
+  /// https://www.color-name.com/hex/333333
+  static const charcoal = Color(0xFF333333);
+
+  /// Davy's Grey
+  ///
+  /// https://www.color-name.com/hex/555555
+  static const davysGray = Color(0xFF555555);
 }

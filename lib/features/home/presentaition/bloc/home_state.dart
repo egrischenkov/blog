@@ -36,19 +36,25 @@ final class HomeState extends Equatable {
   final HomeStatus status;
 
   /// @nodoc
+  final List<ArticleEntity> articles;
+
+  /// @nodoc
   const HomeState({
     this.status = HomeStatus.initial,
+    this.articles = const [],
   });
 
   /// @nodoc
   HomeState copyWith({
     HomeStatus? status,
+    List<ArticleEntity>? articles,
   }) {
     return HomeState(
       status: status ?? this.status,
+      articles: articles ?? this.articles,
     );
   }
 
   @override
-  List<Object> get props => [status];
+  List<Object> get props => [status, articles];
 }

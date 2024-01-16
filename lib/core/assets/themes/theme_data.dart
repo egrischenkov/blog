@@ -28,9 +28,7 @@ abstract final class AppThemeData {
     appBarTheme: AppBarTheme(
       color: _lightColorScheme.primary,
       elevation: 0,
-      iconTheme: IconThemeData(
-        color: _lightColorScheme.onPrimary,
-      ),
+      iconTheme: IconThemeData(color: _lightColorScheme.onSecondary),
     ),
     dividerTheme: DividerThemeData(
       color: _lightColorScheme.inactive,
@@ -62,9 +60,7 @@ abstract final class AppThemeData {
     appBarTheme: AppBarTheme(
       color: _darkColorScheme.primary,
       elevation: 0,
-      iconTheme: IconThemeData(
-        color: _darkColorScheme.onPrimary,
-      ),
+      iconTheme: IconThemeData(color: _darkColorScheme.onPrimary),
     ),
     dividerTheme: DividerThemeData(
       color: _darkColorScheme.inactive,
@@ -74,8 +70,8 @@ abstract final class AppThemeData {
     extensions: [_darkColorScheme, _textTheme],
   );
 
-  static const _lightColorScheme = AppColorsTheme.light();
-  static const _darkColorScheme = AppColorsTheme.dark();
+  static final _lightColorScheme = AppColorsTheme.light();
+  static final _darkColorScheme = AppColorsTheme.dark();
 
   static final _textTheme = AppTextTheme.base();
 }

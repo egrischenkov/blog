@@ -14,6 +14,8 @@ import 'package:provider/single_child_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   const _AppBlocObserver();
 
   final sharedPreferences = await SharedPreferences.getInstance();

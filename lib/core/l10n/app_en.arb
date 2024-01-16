@@ -1,4 +1,9 @@
 {
+    "@segmentCommon": {
+        "---------": "---------",
+        "description": "Common"
+    },
+    "somethingWentWrong": "Something went wrong",
     "@segmentTabBar": {
         "---------": "---------",
         "description": "For TabBar"
@@ -47,5 +52,6 @@
     "contentSectionMonthsAgo": "{count, plural, =1 {1 month ago} other {{count} months ago}}",
     "contentSectionDaysAgo": "{count, plural, =1 {1 day ago} other {{count} days ago}}",
     "contentSectionHoursAgo": "{count, plural, =1 {1 hour ago} other {{count} hours ago}}",
-    "contentSectionMinutesAgo": "{count, plural, =1 {1 minute ago} other {{count} minutes ago}}"
+    "contentSectionMinutesAgo": "{count, plural, =1 {1 minute ago} other {{count} minutes ago}}",
+    "contentSectionReloadArticles": "TRY DOWNLOADING THE ARTICLES AGAIN"
 }

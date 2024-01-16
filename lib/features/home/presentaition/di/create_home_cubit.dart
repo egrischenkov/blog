@@ -9,12 +9,13 @@ import 'package:provider/provider.dart';
 
 /// Creates instance of [HomeCubit] and injects required dependencies.
 HomeCubit createHomeCubit(BuildContext context) {
+  final localeService = context.read<ILocaleService>();
   return HomeCubit(
     context.read<IThemeService>(),
     context.read<ILocaleService>(),
     HomeRepository(
       articlesConverter: ArticlesConverter(),
-      dataProvider: HomeDataProvider(),
+      dataProvider: HomeDataProvider(context, localeService.currentLocale.languageCode),
     ),
   );
 }

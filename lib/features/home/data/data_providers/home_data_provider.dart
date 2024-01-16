@@ -1,19 +1,23 @@
 import 'dart:convert';
 
 import 'package:blog/features/home/data/dto/article_dto.dart';
-import 'package:flutter/services.dart';
-
-const _contentJsonPath = 'assets/content.json';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 /// @nodoc
 class HomeDataProvider implements IHomeDataProvider {
+  final BuildContext _context;
+  final String _localeCode;
+
+  /// @nodoc
+  const HomeDataProvider(this._context, this._localeCode);
+
   @override
   Future<List<ArticleDto>> getArticleDtos() async {
-    final contentJsonString = await rootBundle.loadString(_contentJsonPath);
-    final contentJson = json.decode(contentJsonString) as Iterable<Map<String, dynamic>>;
-
-    return List<ArticleDto>.from(
-      contentJson.map((articleData) async {
+    final contentJson = await DefaultAssetBundle.of(_context).loadString(_getContentJsonPath(_localeCode));
+    final content = json.decode(contentJson) as List<dynamic>;
+    final articles = await Future.wait(
+      content.map((articleData) async {
         final articlePath = articleData['articlePath'] as String;
         final article = await rootBundle.loadString(articlePath);
 
@@ -26,6 +30,11 @@ class HomeDataProvider implements IHomeDataProvider {
         );
       }),
     );
+    return articles;
+  }
+
+  String _getContentJsonPath(String localeCode) {
+    return 'assets/content/content_$localeCode.json';
   }
 }
 

@@ -7,19 +7,30 @@ class ArticlesSectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      padding: const EdgeInsets.all(112),
-      shrinkWrap: true,
-      itemCount: mockItems.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        mainAxisSpacing: 32,
-        crossAxisSpacing: 32,
-      ),
-      itemBuilder: (_, index) {
-        final item = mockItems[index];
+    final cubit = context.read<HomeCubit>();
 
-        return _ArticleWidget(articleEntity: item);
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (_, state) {
+        if (state.status == HomeStatus.failure) return ArticlesErrorWidget(onUpdate: cubit.updateArticles);
+
+        final loading = state.status == HomeStatus.loading;
+        final articles = state.articles;
+        return GridView.builder(
+          padding: const EdgeInsets.all(112),
+          shrinkWrap: true,
+          itemCount: loading ? 6 : articles.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 32,
+            crossAxisSpacing: 32,
+          ),
+          itemBuilder: (_, index) {
+            if (loading) return const _ShimmerArticleWidget();
+
+            final item = articles[index];
+            return _ArticleWidget(articleEntity: item);
+          },
+        );
       },
     );
   }
@@ -55,7 +66,7 @@ class _ArticleWidgetState extends State<_ArticleWidget> {
       onHover: (_) => _handleHover(hover: true),
       onExit: (_) => _handleHover(hover: false),
       child: GestureDetector(
-        onTap: () => _navigateToArticlePage(widget.articleEntity),
+        onTap: () => _navigateToArticlePage(_articleEntity),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 100),
           transform: Matrix4.translationValues(0, isHovered ? -8 : 0, 0),
@@ -128,76 +139,23 @@ class _ArticleWidgetState extends State<_ArticleWidget> {
   }
 }
 
-/// @nodoc
-final mockItems = [
-  ArticleEntity(
-    title: 'About something very very interesting',
-    topic: 'programming',
-    imagePath: AppImages.imgArticlePlaceholder,
-    createdAt: DateTime(DateTime.now().year - 1, DateTime.now().month, DateTime.now().day),
-    articleInMarkdown: 'assets/articles/null_in_dart.md',
-  ),
-  ArticleEntity(
-    title: 'How to write clean code',
-    topic: 'programming',
-    imagePath: AppImages.imgArticlePlaceholder,
-    createdAt: DateTime(DateTime.now().year, DateTime.now().month - 1, DateTime.now().day),
-    articleInMarkdown: 'assets/articles/null_in_dart.md',
-  ),
-  ArticleEntity(
-    title: 'How to write tests',
-    topic: 'programming',
-    imagePath: AppImages.imgArticlePlaceholder,
-    createdAt: DateTime.now(),
-    articleInMarkdown: 'assets/articles/null_in_dart.md',
-  ),
-  ArticleEntity(
-    title: 'How to earn much money',
-    topic: 'programming',
-    imagePath: AppImages.imgArticlePlaceholder,
-    createdAt: DateTime.now(),
-    articleInMarkdown: 'assets/articles/null_in_dart.md',
-  ),
-  ArticleEntity(
-    title: 'How to earn much money',
-    topic: 'programming',
-    imagePath: AppImages.imgArticlePlaceholder,
-    createdAt: DateTime.now(),
-    articleInMarkdown: 'assets/articles/null_in_dart.md',
-  ),
-  ArticleEntity(
-    title: 'How to earn much money',
-    topic: 'programming',
-    imagePath: AppImages.imgArticlePlaceholder,
-    createdAt: DateTime.now(),
-    articleInMarkdown: 'assets/articles/null_in_dart.md',
-  ),
-  ArticleEntity(
-    title: 'How to earn much money',
-    topic: 'programming',
-    imagePath: AppImages.imgArticlePlaceholder,
-    createdAt: DateTime.now(),
-    articleInMarkdown: 'assets/articles/null_in_dart.md',
-  ),
-  ArticleEntity(
-    title: 'How to earn much money',
-    topic: 'programming',
-    imagePath: AppImages.imgArticlePlaceholder,
-    createdAt: DateTime.now(),
-    articleInMarkdown: 'assets/articles/null_in_dart.md',
-  ),
-  ArticleEntity(
-    title: 'How to earn much money',
-    topic: 'programming',
-    imagePath: AppImages.imgArticlePlaceholder,
-    createdAt: DateTime.now(),
-    articleInMarkdown: 'assets/articles/null_in_dart.md',
-  ),
-  ArticleEntity(
-    title: 'How to earn much money',
-    topic: 'programming',
-    imagePath: AppImages.imgArticlePlaceholder,
-    createdAt: DateTime.now(),
-    articleInMarkdown: 'assets/articles/null_in_dart.md',
-  ),
-];
+class _ShimmerArticleWidget extends StatelessWidget {
+  const _ShimmerArticleWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    final colorsTheme = context.colorsTheme;
+
+    return Shimmer(
+      gradient: colorsTheme.shimmerGradient,
+      child: Container(
+        height: 500,
+        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(32),
+          color: colorsTheme.primary,
+        ),
+      ),
+    );
+  }
+}

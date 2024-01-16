@@ -73,8 +73,11 @@ final class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
   /// Secondary color for accent details.
   final Color secondaryAccent;
 
+  /// Shimmer gradient.
+  final LinearGradient shimmerGradient;
+
   /// Base light theme.
-  const AppColorsTheme.light()
+  AppColorsTheme.light()
       : primary = ColorsPalette.violetsAreBlue,
         onPrimary = ColorsPalette.white,
         secondary = ColorsPalette.lotion,
@@ -89,10 +92,15 @@ final class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
         onDanger = ColorsPalette.white,
         inactive = ColorsPalette.coolGrey,
         accent = ColorsPalette.violetsAreBlue,
-        secondaryAccent = ColorsPalette.paleChestnut;
+        secondaryAccent = ColorsPalette.paleChestnut,
+        shimmerGradient = _getShimmerGradient(
+          ColorsPalette.secondBrightGrey,
+          ColorsPalette.cultured,
+          ColorsPalette.secondBrightGrey,
+        );
 
   /// Base dark theme.
-  const AppColorsTheme.dark()
+  AppColorsTheme.dark()
       : primary = ColorsPalette.palatinateBlue,
         onPrimary = ColorsPalette.white,
         secondary = ColorsPalette.eerieBlack,
@@ -107,7 +115,12 @@ final class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
         onDanger = ColorsPalette.white,
         inactive = ColorsPalette.coolGrey,
         accent = ColorsPalette.violetsAreBlue,
-        secondaryAccent = ColorsPalette.paleChestnut;
+        secondaryAccent = ColorsPalette.paleChestnut,
+        shimmerGradient = _getShimmerGradient(
+          ColorsPalette.charcoal,
+          ColorsPalette.davysGray,
+          ColorsPalette.charcoal,
+        );
 
   const AppColorsTheme._({
     required this.primary,
@@ -125,6 +138,7 @@ final class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
     required this.inactive,
     required this.accent,
     required this.secondaryAccent,
+    required this.shimmerGradient,
   });
 
   @override
@@ -145,6 +159,7 @@ final class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
     Color? inactive,
     Color? accent,
     Color? secondaryAccent,
+    LinearGradient? shimmerGradient,
   }) {
     return AppColorsTheme._(
       primary: primary ?? this.primary,
@@ -162,6 +177,7 @@ final class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
       inactive: inactive ?? this.inactive,
       accent: accent ?? this.accent,
       secondaryAccent: secondaryAccent ?? this.secondaryAccent,
+      shimmerGradient: shimmerGradient ?? this.shimmerGradient,
     );
   }
 
@@ -190,6 +206,21 @@ final class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
       inactive: Color.lerp(inactive, other.inactive, t)!,
       accent: Color.lerp(accent, other.accent, t)!,
       secondaryAccent: Color.lerp(secondaryAccent, other.secondaryAccent, t)!,
+      shimmerGradient: shimmerGradient,
+    );
+  }
+
+  static LinearGradient _getShimmerGradient(
+    Color firstColor,
+    Color secondColor,
+    Color thirdColor,
+  ) {
+    return LinearGradient(
+      colors: [firstColor, secondColor, thirdColor],
+      stops: const [0.1, 0.3, 0.4],
+      begin: const Alignment(-1.0, -0.3),
+      end: const Alignment(1.0, 0.3),
+      tileMode: TileMode.clamp,
     );
   }
 }

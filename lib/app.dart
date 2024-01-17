@@ -7,6 +7,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
+const _title = 'Grischenkov\'s BLOG';
+
 /// Application widget.
 ///
 /// Includes [MaterialApp]'s settings.
@@ -22,6 +24,7 @@ class App extends StatelessWidget {
         builder: (_, __) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
+            title: _title,
             home: HomePage(),
             theme: AppThemeData.lightTheme,
             darkTheme: AppThemeData.darkTheme,

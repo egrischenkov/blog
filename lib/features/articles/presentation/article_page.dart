@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:blog/core/common/extensions/build_context_extension.dart';
 import 'package:blog/core/common/widgets/footer_widget.dart';
+import 'package:blog/features/articles/presentation/article_page_constants.dart';
 import 'package:blog/features/home/domain/entities/article_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -38,6 +39,21 @@ class ArticlePage extends StatelessWidget {
             centerTitle: false,
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 64)),
+          SliverToBoxAdapter(
+            child: Hero(
+              tag: ArticlePageConstants.mainArticlePicture,
+              child: Container(
+                height: 400,
+                margin: const EdgeInsets.symmetric(horizontal: 128),
+                child: Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.asset(articleEntity.imagePath),
+                  ),
+                ),
+              ),
+            ),
+          ),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 128),

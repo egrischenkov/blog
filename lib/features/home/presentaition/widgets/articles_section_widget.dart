@@ -67,38 +67,35 @@ class _ArticleWidgetState extends State<_ArticleWidget> {
       onExit: (_) => _handleHover(hover: false),
       child: GestureDetector(
         onTap: () => _navigateToArticlePage(_articleEntity),
-        child: Hero(
-          tag: ArticlePageConstants.mainArticlePicture,
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 100),
-            transform: Matrix4.translationValues(0, isHovered ? -8 : 0, 0),
-            height: 500,
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
-            decoration: BoxDecoration(
-              image: DecorationImage(image: AssetImage(_articleEntity.imagePath), fit: BoxFit.cover),
-              borderRadius: BorderRadius.circular(32),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  _articleEntity.title,
-                  style: textTheme.bold24.copyWith(color: colorsScheme.onPrimary),
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 24),
-                Text(
-                  _formatArticleCreationDate(_articleEntity.createdAt, l10n),
-                  style: textTheme.bold16.copyWith(color: colorsScheme.onPrimary),
-                ),
-                const Spacer(),
-                Text(
-                  _articleEntity.topic,
-                  style: textTheme.bold16.copyWith(color: colorsScheme.onPrimary),
-                ),
-              ],
-            ),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 100),
+          transform: Matrix4.translationValues(0, isHovered ? -8 : 0, 0),
+          height: 500,
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
+          decoration: BoxDecoration(
+            image: DecorationImage(image: AssetImage(_articleEntity.imagePath), fit: BoxFit.cover),
+            borderRadius: BorderRadius.circular(32),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                _articleEntity.title,
+                style: textTheme.bold24.copyWith(color: colorsScheme.onPrimary),
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 24),
+              Text(
+                _formatArticleCreationDate(_articleEntity.createdAt, l10n),
+                style: textTheme.bold16.copyWith(color: colorsScheme.onPrimary),
+              ),
+              const Spacer(),
+              Text(
+                _articleEntity.topic,
+                style: textTheme.bold16.copyWith(color: colorsScheme.onPrimary),
+              ),
+            ],
           ),
         ),
       ),

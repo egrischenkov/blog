@@ -43,7 +43,7 @@ flutter:
     - assets/content/content_en.json
     - assets/content/content_ru.json
     - assets/articles/main_images/
-    - assets/articles/resources/
+    - assets/articles/resources/null_in_dart/
     # Articles in english.
     - assets/articles/en/null_in_dart.md
     # Articles in russian.

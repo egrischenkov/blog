@@ -37,6 +37,7 @@ class HomeCubit extends Cubit<HomeState> {
   /// Changes locale.
   void changeLocale(String selectedLocaleCode) {
     _localeService.selectLocale(selectedLocaleCode);
+    updateArticles();
   }
 
   /// Updates list of articles.
@@ -46,7 +47,7 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       emit(state.copyWith(status: HomeStatus.loading));
 
-      final articles = await _homeRepository.getArticles();
+      final articles = await _homeRepository.getArticles(_localeService.currentLocale.languageCode);
 
       emit(state.copyWith(status: HomeStatus.success, articles: articles));
     } catch (e, st) {

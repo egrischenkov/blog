@@ -19,8 +19,8 @@ class HomeRepository implements IHomeRepository {
         _articlesConverter = articlesConverter;
 
   @override
-  Future<List<ArticleEntity>> getArticles() async {
-    final articleDtos = await _dataProvider.getArticleDtos();
+  Future<List<ArticleEntity>> getArticles(String localeCode) async {
+    final articleDtos = await _dataProvider.getArticleDtos(localeCode);
     return _articlesConverter.convertMultiple(articleDtos).toList();
   }
 }

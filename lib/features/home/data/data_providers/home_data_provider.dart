@@ -7,14 +7,13 @@ import 'package:flutter/services.dart' show rootBundle;
 /// @nodoc
 class HomeDataProvider implements IHomeDataProvider {
   final BuildContext _context;
-  final String _localeCode;
 
   /// @nodoc
-  const HomeDataProvider(this._context, this._localeCode);
+  const HomeDataProvider(this._context);
 
   @override
-  Future<List<ArticleDto>> getArticleDtos() async {
-    final contentJson = await DefaultAssetBundle.of(_context).loadString(_getContentJsonPath(_localeCode));
+  Future<List<ArticleDto>> getArticleDtos(String localeCode) async {
+    final contentJson = await DefaultAssetBundle.of(_context).loadString(_getContentJsonPath(localeCode));
     final content = json.decode(contentJson) as List<dynamic>;
     final articles = await Future.wait(
       content.map((articleData) async {
@@ -41,5 +40,5 @@ class HomeDataProvider implements IHomeDataProvider {
 /// Data provider for Home page.
 abstract interface class IHomeDataProvider {
   /// Gets list of [ArticleDto].
-  Future<List<ArticleDto>> getArticleDtos();
+  Future<List<ArticleDto>> getArticleDtos(String localeCode);
 }

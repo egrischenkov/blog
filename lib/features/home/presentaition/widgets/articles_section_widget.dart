@@ -28,7 +28,7 @@ class ArticlesSectionWidget extends StatelessWidget {
             if (loading) return const _ShimmerArticleWidget();
 
             final item = articles[index];
-            return _ArticleWidget(articleEntity: item);
+            return _ArticleWidget(key: ValueKey(item.articleInMarkdown), articleEntity: item);
           },
         );
       },
@@ -39,7 +39,7 @@ class ArticlesSectionWidget extends StatelessWidget {
 class _ArticleWidget extends StatefulWidget {
   final ArticleEntity articleEntity;
 
-  const _ArticleWidget({required this.articleEntity});
+  const _ArticleWidget({super.key, required this.articleEntity});
 
   @override
   State<_ArticleWidget> createState() => _ArticleWidgetState();

@@ -11,7 +11,6 @@ class ArticleEntity with _$ArticleEntity {
     required String topic,
     required String articleInMarkdown,
     required String imagePath,
-    // TODO(egrischenkov): String representation must be as: '2002-02-27'.
     required DateTime createdAt,
   }) = _ArticleEntity;
 }

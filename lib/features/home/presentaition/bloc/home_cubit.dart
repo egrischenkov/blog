@@ -48,6 +48,7 @@ class HomeCubit extends Cubit<HomeState> {
       emit(state.copyWith(status: HomeStatus.loading));
 
       final articles = await _homeRepository.getArticles(_localeService.currentLocale.languageCode);
+      articles.sort((a, b) => b.createdAt.compareTo(a.createdAt));
 
       emit(state.copyWith(status: HomeStatus.success, articles: articles));
     } catch (e, st) {

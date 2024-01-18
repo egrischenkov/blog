@@ -5,5 +5,12 @@
         "createdAt": "2023-10-08",
         "imagePath": "assets/articles/main_images/null.jpeg",
         "articlePath": "assets/articles/en/null_in_dart.md"
+    },
+    {
+        "title": "Git. Briefly about the main thing",
+        "topic": "Instruments",
+        "createdAt": "2021-11-12",
+        "imagePath": "assets/articles/main_images/git.png",
+        "articlePath": "assets/articles/en/git.md"
     }
 ]

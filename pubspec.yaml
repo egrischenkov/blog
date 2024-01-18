@@ -44,10 +44,13 @@ flutter:
     - assets/content/content_ru.json
     - assets/articles/main_images/
     - assets/articles/resources/null_in_dart/
+    - assets/articles/resources/git/
     # Articles in english.
     - assets/articles/en/null_in_dart.md
+    - assets/articles/en/git.md
     # Articles in russian.
     - assets/articles/ru/null_in_dart.md
+    - assets/articles/ru/git.md
 
   fonts:
     - family: SchibstedGrotesk

@@ -54,6 +54,7 @@ class ArticlePage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 128),
               child: MarkdownBody(
+                selectable: true,
                 data: articleEntity.articleInMarkdown,
                 onTapLink: (_, url, __) {
                   url != null ? launchUrl(Uri.parse(url)) : log('Url is null');

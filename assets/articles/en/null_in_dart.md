@@ -1,105 +1,132 @@
-# Null Safety в Dart: с нуля до капитана
+## Introduction
 
-## Введение
-****
-Всем привет! Сегодня я хочу обратить ваше внимание на такой важный концепт в программировании, как null, поведать о его истории и выяснить, как Dart решает проблему работы с null.
+Hi there! Today I'm going to tell about such important topic in programming as `NULL`, its history and find out how Dart solves the problem of work with null values.
 
-Начнем с сухого определения. Null - это специальное значение или состояние, которое обозначает отсутствие информации или данных в переменной, объекте или месте, где оно используется. Null фактически представляет собой отсутствие значения.
+&nbsp;
 
-<p>
-	<img src="../resources/null.png" alt="page_transition">
-</p>
+Let's start with a definition. Null is a special value or state which indicates an absence of information or data in variable. In other words Null represents the absence of value.
 
-Какова же роль такого значения?
+&nbsp;
 
-Тут стоит зайти несколько издалека. Дело в том, что до появления концепции null или аналогичных механизмов, ссылки в низкоуровневых языках программирования могли содержать так называемый “мусор” (garbage) или произвольные значения, если они не были явно инициализированы. Это происходило из-за особенностей управления памятью. И когда такое случалось, программа могла вести себя непредсказуемым образом: возникали серьезные ошибкам, сбои или даже утечки данных. Что разумеется, не могло никого устраивать.
+![](resource:assets/articles/resources/null_in_dart/null_en.png)
 
-И вот здесь на помощь приходит концепция null. Она помогает избежать непредсказуемого поведения программы, которое может возникнуть, если ссылка не имеет явного значения и указывает на произвольную область памяти. Однако стоит отметить, что null также может быть источником ошибок, если не используется осторожно. Проблемы с null включают в себя забывание проверки на null, неправильное использование и допущение ошибок в коде. Именно по этим причинам некоторые языки программирования исследуют альтернативные методы обработки отсутствия значения, чтобы уменьшить риски ошибок и сделать код более безопасным и предсказуемым.
+&nbsp;
 
-Пример кода на C:
+**What is role of Null?**
+
+Here it's worth starting with history of Null. Before Null was existing, references to entities in low-level programming languages could contain garbage or arbitrary values if they were not explicitly initialized. It was happening because of memory management features. And when it was happening program might behave really weird - serious errors, failures or even data leaks occurs. And of course, this can't be liked by anyone.
+
+&nbsp;
+
+And this is where the null concept comes to the rescue. It helps us avoid unpredictable program's behaviour which can occurs if reference doesn't have any value and points to an arbitrary memory area. Though null also may lead to errors if you don't use it carefully. There are such probles as forgetting to check for null, incorrect use and mistakes in the code. That is why some programming laguages are searching for alternate solutions for handling null related errors to reduce the risk of errors and make code safer and more predictable.
+
+&nbsp;
+
+`C` code example:
 
 ```c
 #include <stdio.h>
 
 int main() {
-    int* ptr; // Объявляем указатель на int, но не инициализируем его
+    int* ptr; // Here we declare a pointer to int and don't initialize it.
 
-    int x = *ptr; // Попытка прочитать значение по неинициализированному указателю
+    int x = *ptr; // Here we try to read value from an uninitialized pointer.
 
-    printf("Значение x: %d\n", x);
+    printf("x value: %d\n", x);
 
     return 0;
 }
 ```
 
-# История возникновения Null
+&nbsp;
 
-История возникновения null довольно увлекательная, поскольку его создатель - Энтони Хоар (английский ученый в области информатики, который также известен разработкой алгоритма "быстрой сортировки") спустя почти 50 лет выступил с презентацией с говорящим названием - "Null References: The Billion Dollar Mistake". Со слов Хоар, он придумал null, поскольку это было самое простое и очевидное решение в обработке ситуаций с указанием на произвольную область памяти. В начале презентации он подчеркивает, что множество ошибок и сбоев в программном обеспечении связаны с null-ссылками. Собственно поэтому презентация так и называется.
+# History of Null
 
-<p>
-	<img src="../resources/father_of_null.png" alt="page_transition">
-</p>
+The history of the invention of null is quite fascinating, since its creator, Anthony Hoare (an English computer scientist who is also known for developing the “quick sort” algorithm), almost 50 years later, made a presentation with a title - “Null References: The Billion Dollar Mistake”. He said that he invented null, because it was most obvious solution for handling situations pointing to an arbitrary memory area. At the beggining of presentation he was underlining that most of errors and failures are relate to null pointers. That’s actually why the presentation is called that.
 
-Пробежимся по самым основным негативным последствиям, связанным с null:
-1. Отсутствие значения: null обычно используется для указания на отсутствие значения или объекта. Это означает, что переменная, содержащая null, не имеет конкретного значения или ссылки на объект. Это может привести к ситуации, когда код пытается обратиться к этой переменной или объекту, которого на самом деле нет, что вызывает ошибку.
-2. Неявная проверка: Во многих случаях программисты могут забывать явно проверять переменные на null перед их использованием. Это может привести к ситуации, когда код пытается обратиться к null, что вызывает исключение или ошибку времени выполнения.
-3. Неявное преобразование: В некоторых языках программирования, null может неявно преобразовываться в другие типы данных. Это также может вызвать неожиданное поведение программы, если программист не учел этот момент.
-4. Сложность отладки: Ошибки, связанные с null, могут быть сложными для выявления и исправления. Поскольку null может быть присвоено переменной в разных местах кода, найти источник ошибки может быть непросто.
-5. Непредсказуемое поведение: Использование null может привести к непредсказуемому поведению программы в зависимости от ее текущего состояния. Это может затруднить разработку и поддержку кода.
+&nbsp;
 
-Итак, проблема с null заключается в том, что его использование может создавать ситуации, в которых программный код работает непредсказуемо, и это может привести к ошибкам времени выполнения, которые могут быть трудными для обнаружения и устранения. Поэтому Хоар завершает лекцию призывом к программистам и разработчикам языков программирования задуматься о проблеме null и стремиться к поиску более безопасных и надежных способов работы с отсутствием значения. И разработчики Dart не стали исключением, поскольку они разработали механизм null safety.
+![](resource:assets/articles/resources/null_in_dart/father_of_null_en.png)
 
-# Null в Dart
+&nbsp;
 
-В языке Dart изначально существовал null и он используется для обозначения отсутствия значения или непроинициализированной переменной.
+**Most negative consequences according to null related errors**
+1. Variable has no value. Null usually used for indicating the absence of a value or object. It means that null variable doesn't have any value or reference to object. This may leads to a situation when code tries to access value or object that actually doesn't exist which causes an error.
+2. Implicit checking. Oftenly programmers may forget to check variables for null before using them. This can leads to a situation where code is trying to access null, causing error or exceptions.
+3. Implicit conversion. In some programming languages null can be implicitly converted to other data types. And this can leads to unpredictable program behaviour.
+4. Difficult to debug. Null errors can be really difficult to identify and fix. Because Null can be in several variables it may be uneasy to find source of errors.
+5. Unpredictable behaviour. Using null can cause program to behave unexpectedly depending on its current state. This can make code difficult to develop and maintain.
 
+&nbsp;
 
-Стоит отметить, что такое значение могло возникнуть в результате любого обращения к типу, поскольку прежняя система типов это позволяла.
+So problem with null is that anybody can cause situations where code works upredictable. And this can leads to runtime errors which may be difficult to debug. So Hoar ends a lecture with a call to programmers and language developers to think about "Null problem" and strive to find more reliable ways to deal with null values. And Dart developers were no exception as they developed a null safety mechanism.
 
-<p>
-	<img src="../null_in_dart/resourses/old_type_system.png" alt="page_transition" width="250">
-</p>
+&nbsp;
 
- Из данной иерархии становится ясно, что это было возможно поскольку Null являлся подтипом всех типов. В силу этого null мог с легкостью проскочить в программу и вызвать различные исключения.
+# Null in Dart
+
+Since Dart developed there were null and he was using for specifying absence of value or uninitialized variable.
+
+It worth noting that such value could created in result from any call to type as previous type system allowed it.  
+
+&nbsp;
+
+![](resource:assets/articles/resources/null_in_dart/old_null_in_dart.png)
+
+&nbsp;
+
+Thanks to such type hierarchy it's getting more clear that it was possible because Null was a subtype for all type. So null could easily get into program and cause various exeptions.
  
- Пример:
+ Example:
 ```dart
 bool isEmpty(String string) => string.length == 0;
 
 main() {
-  isEmpty(null); // Вызовет NoSuchMethodException
+  isEmpty(null); // Causes NoSuchMethodException
 }
 ```
 
-Что естественно является совершенно не безопасным.
-Поэтому команда Dart решила не оставаться в стороне и следуя примерам таких языков, как Kotlin, Swift, Rust и 
-многих других, разработала собственную концепцию - Null Safety. Данная концепция призвана обезопасить разработчиков от ошибок, возникающих в результате непреднамеренного доступа к переменным, для которых установлено значение null. И основа ее работы заключается в том, что она изменила все потенциальные ошибки времени исполнения на так называемые edit-time ошибки. Это означает, что анализатор будет еще на этапе работы с кодом заставлять вас:
+Which of cource is completely unsafe.
 
-- обязательно задавать значение переменным, в которых значение null не предусмотрено.
-- и соответственно запрещать задавать значение null таким переменным.
+Therefore Dart command decided not to stand aside and follow examples of languages such as Kotlin, Swift, Rust and many others. So they developed their own concept - `Null Safety`. This concept intends to safe programmers from null related errors and the basis of its work is that it changed all potential runtime errors to so-called edit-time errors.
 
-И чтобы этого достичь, команда Dart следовала определенным принципам:
+&nbsp;
 
-1. **Код должен быть безопасным по умолчанию**: Это означает, что написание кода, используя только лишь Null Safety, не должно привести к исключениям, связанным с null.
-
-2. **Код, следующий принципам Null Safety, должен быть легок в написании**: Ничего слишком нового в синтаксис языка не добавляется, а следовательно, он останется таким же простым в написании.
-
-3. **Код, получившийся в результате следования Null Safety, должен быть абсолютно надежным**: В этом принципе даются гарантии, что уже написанный код с использованием Null Safety, если только вы сами не обходите эти правила, должен быть надежным.
-
-Но при этом стоит понимать, что устранение null не является самой задачей команды Dart, поскольку нет ничего плохого с самим null. Он достаточно удобен, если мы хотим указать отсутствие значение, например, в опциональных параметрах, когда пользователь имеет право не передавать их полностью. Как сказано в документации: "Плохо не то, что null существует, а то, что ошибки, связанные с ним, могут возникнуть там, где вы этого не ожидаете." И чтобы минимизировать такие неожиданные места, Dart снабжает нас определенными инструментами и предоставляет нам обновленную систему типов.
-
-# Особенности Null Safety в Dart
-
-Новая система типов в Dart выглядит следующим образом:
-
-<p>
-	<img src="../null_in_dart/resourses/new_type_system.png" alt="page_transition" width="250">
-</p>
-
-Здесь мы видим, что Null перестал быть подтипом всех типов и вынесен в отдельное ветку. Таким образом, Dart в корне решает проблему доступа к null, поскольку теперь все типы по умолчанию не nullable.
+This means that analyzer will force us:
+- mandatory assign value to variables that don't have a null value.
+- prohibit setting the value null to such variables.
+  
+&nbsp;
 
 
-Однако, как мы уже говорили, Null вовсе не бесполезен. Существуют ситуации, когда он может быть необходим. Рассмотрим пример из документации:
+In order to achieve this, the Dart team followed certain principles:
+
+1. **Code should be safe by default**: It means that code creation using only Null Safety must not leads to exceptions.
+
+2. **Null safe code should be easy to write**: Nothing too new is added to the syntax of language, therefore it will remain just as easy to write.
+3. **The resulting null safe code should be fully sound**: This priciple ensures that code already written with Null Safety should be reliable unless you bypass rules yourself.
+
+&nbsp;
+
+But you need to understand that elimination of null isn't main goal for Dart command as there is nothing bad with null. Actually it's rather convenient if we want to specify absence of value, like in optional parameters when user has a right not to pass them all. As documentation says: "It is not null that is bad, it is having null go where you don’t expect it that causes problems." To minimize such unexpected moments Dart provides us with certain instruments and an updated type system. 
+
+&nbsp;
+
+# Null Safety features
+
+Dart's new type system looks like:
+
+&nbsp;
+
+![](resource:assets/articles/resources/null_in_dart/new_type_system.png)
+
+&nbsp;
+
+Here we can see that Null is no more the subtype of all types and has been moved to a separate branch. Thus Dart fundamentally solves problem of accessing null since all types are now non-nullable by default. 
+
+&nbsp;
+
+However as we already said Null isn't useless. There are situations when he can be really necessary. Let's look at an example from the documentation:
 
 ```dart
 void makeCoffee(String coffee, [String? dairy]) {
@@ -111,25 +138,39 @@ void makeCoffee(String coffee, [String? dairy]) {
 }
 ```
 
-Следующая запись в параметрах `String?` объявляет так называемые “nullable” типы. Об этом несколько позже, но если в двух словах, такой тип как бы может описывать одно из двух значений: либо `String`, либо `Null`. И благодаря этому у нас есть возможность оставить этот параметр пустым, из-за чего по умолчанию он будет равняться `Null`, и мы сделаем необходимую нам обработку.
+Such type assignment -`String?` declares nullable types. We talk about that later, but in a nutshell such type can declare one of two values: either `String` or `Null`. 
+Thanks to that we have ability to leave this parameter empty and he will be nullable by default.
 
-Теперь давайте подробнее рассмотрим Nullable типы.
+&nbsp;
 
-<p>
-	<img src="../null_in_dart/resourses/nullable_schema.png" alt="page_transition" width="250">
-</p>
 
-Данная запись типа с вопросительным знаком под капотом создает Union тип.
+Now let's take a look at Nullable types.
 
-### Типы Union
+&nbsp;
 
-Типы Union - это концепция в программировании, которая позволяет переменным хранить значения разных типов. Они называются "Union" (или объединенными) типами, потому что они объединяют несколько типов в один. Это полезно, когда вам нужно, чтобы переменная могла содержать разные виды данных.
+![](resource:assets/articles/resources/null_in_dart/nullable_schema.png)
 
-Концепция типов Union имеет свои корни в функциональных языках программирования, таких как Haskell и ML. В этих языках, тип Union, называемый также "алгебраическими типами данных" (Algebraic Data Types), был важной частью системы типов. Они были разработаны для обеспечения безопасности типов и обработки данных разных форм.
+&nbsp;
 
-С течением времени идея типов Union распространилась и в другие языки программирования, и Dart не исключение. Разные языки имеют разные способы реализации типов Union.
+This type assignment with a question mark creates `Union` type under the hood..
 
-В Dart, вы можете использовать библиотеки для создания типов Union, например, библиотеку sealed_unions:
+&nbsp;
+
+### Union types
+
+Union types is a concept that allows variables store values in different types. They are called union types because they unite several types as one. It's rather usefull if you need store different data in single variable. 
+
+&nbsp;
+
+The concept of Union types has its roots in functional programming languages such as Haskell and ML. In these languages the Union type also called "Algebraic Data Types" was an important part of the type system. They were designed to provide type safety and handle different forms of data.
+
+&nbsp;
+
+Over time idea of Union types spread to other languages including Dart. Different languages have different ways of implementing Union types.
+
+&nbsp;
+
+In Dart you can use libraries for creating Union types. For example - `sealed_unions`:
 
 ```dart
 import 'package:sealed_unions/sealed_unions.dart';
@@ -142,17 +183,17 @@ class MyUnionType extends Union2Impl<int, String> {
 }
 ```
 
-Но с версии 3.0 Dart представил sealed классы, и теперь подобные структуры можно создавать следующим образом:
+But since 3.0 version Dart provides sealed classes. And now you can create such structures:
 
 ```dart
 void main() {
-  // Создает Null значение
+  // Creates Null value
   var nullableString1 = NullableString.nullValue();
 
-  // Создает String значение
+  // Creates String value
   final nullableString2 = NullableString.stringValue('Hello, world!');
 
-  // Проверки на Null
+  // Null check
   if (nullableString1 is NullValue) {
     print('nullableString1 is null');
   }
@@ -161,10 +202,10 @@ void main() {
   }
   if (nullableString2 is StringValue) {
     final value = nullableString2.value;
-    // Какая-нибудь обработка value
+    // Some work with value
   }
   
-  // Меняет с Null на String
+  // Changes String to Null
   nullableString1 = NullableString.stringValue('fdsdf'); 
 }
 
@@ -187,63 +228,64 @@ class StringValue extends NullableString {
 }
 ```
 
-Но это уже другая история:
-<p>
-	<img src="../null_in_dart/resourses/different_story.jpg" alt="page_transition" width="250">
-</p>
+&nbsp;
 
+Let's return to nullable types. So we found that nullable are Union types. There are two more points you need to remember about them:
 
-Вернемся к nullable типам. Итак, мы выяснили, что nullable представляют собой Union типы. Касательно них нужно усвоить еще два момента:
-
-1. Компилятор Dart позволяет присваивать `String` переменным значения типа `String?` без явного приведения типов, потому что `String?` является более общим типом, который включает в себя `String`. Однако обратное не справедливо: вы не можете безопасно присвоить переменной `String` значение `String?`, не используя явное приведение типов или проверку на null.
+1. Dart compiler allows `String` variables to be assigned values of type `String?` without explicit type casting, because `String?` is a more general type that includes `String`. However you cannot safely assign a `String` variable to the value `String?` without using an explicit type cast or null check.
 
 ```dart
 String? nullableString = 'lolkek';
-String string = nullableString; // Анализатор будет брехаться
-// Нужно сделать явное приведение
+String string = nullableString; // Analyzer won't be happy
+// Need to make explicit casting
 String string = nullableString!;
 ```
-2. Любой вызов методов на nullable типы не возможен. Исключения: toString, hashCode, ==.
+2. Any method call on nullable types is impossible. Exeptions: `toString`, `hashCode`, `==`.
 
 ```dart
 void bad(String? maybeString) {
-  print(maybeString.length); // Анализатор будет брехаться
-  // А здесь все четко!
+  print(maybeString.length); // Analyzer won't be happy
+  // But here we are all right!
   final isNull = maybeString == null;
 }
 ```
 
-Чтобы избежать изнурительных if-проверок, мы можем использовать оператор `?` в Dart.
+In order to avoid exhaustive `if` checks we can use `?` opeerator.
 
 ```dart
 String notAString = null;
-print(notAString?.length); // Вывод: null
+print(notAString?.length); // prints: null
 ```
 
-Оператор `?` позволяет избежать ошибок, связанных с доступом к методам и свойствам объекта, если этот объект равен `null`. Таким образом, если `notAString` равен `null`, то `notAString?.length` вернет `null`, а не вызовет ошибку.
+`?` operator avoids errors according to access to object methods and fields if that object is Null. So if `notAString` is `null` then `notAString?.length` will return `null` rather then raise an error.
 
-Также оператор `?` можно использовать в цепочке. До Dart 2.12, чтобы избежать ошибок, приходилось делать проверки для каждого вызова в цепочке:
+&nbsp;
+
+The `?` operator can also be used in a chain. Before Dart 2.12 you had to check for each call in the chain in order to avoid erros.
 
 ```dart
 String? notAString = null;
 print(notAString?.length?.isEven);
 ```
 
-Однако, начиная с Null Safety, нам достаточно одной проверки:
+However since Null Safety we just need only one check:
 
 ```dart
 String? notAString = null;
 print(notAString?.length.isEven);
 ```
+&nbsp;
 
-Теперь, учитывая все ранее описанное,  стоит взглянуть на финальную иерархию:
+Now taking into account everything previously described it's worth taking a look at the final hierarchy:
 
-<p>
-	<img src="../null_in_dart/resourses/top_bottom_type.png" alt="page_transition" width="250">
-</p>
+&nbsp;
+
+![](resource:assets/articles/resources/null_in_dart/top_bottom_type.png)
+
+&nbsp;
 
 
-Если вам понадобится использовать тип, который охватывает все Nullable типы, теперь вместо `Object` вы должны использовать `Object?`. Таким образом, вы включите все Nullable типы в список подходящих типов.
+If you need to use type that covers all nullable types you had to use `Object?` instead of `Object`. This way you will include all Nullable types in the list of eligible types.
 
 ```dart
 void main() {
@@ -259,7 +301,7 @@ void main() {
 }
 ```
 
-Тип `Never` может быть полезен в очень редких случаях, когда нужно обозначить, что метод никогда не вернет значение. Это может быть полезно, например, когда метод генерирует исключение.
+Type `Never` can be usefull in rare cases. Usually when you need to specify that method will never return value. For example when method generates exception:
 
 ```dart
 Never wrongType(String type, Object value) {
@@ -267,27 +309,33 @@ Never wrongType(String type, Object value) {
 }
 ```
 
-Нам осталось обсудить еще две немаловажных темы, которые стали актуальны с появлением NullSafety. Это Flow analysis и late переменные
+We still have two more important topics to discuss which have become relevant with the advent of Null Safety. These are **Flow analysis** and **late** variables.
 
-## Flow Analysis (Анализ потока управления) в Dart
+&nbsp;
 
-Анализ потока управления - это важный аспект компиляции и оптимизации кода, который обычно скрыт от пользователей, но играет важную роль в обеспечении безопасности и производительности программ.
+## Flow Analysis
 
-В Dart с появлением Null Safety был введен анализ потока управления для обеспечения безопасности типов. Это означает, что компилятор Dart теперь может анализировать код и понимать, какие типы могут быть в определенных точках выполнения программы. Это позволяет компилятору выявлять потенциальные ошибки связанные с null и типами на этапе компиляции, что делает код более безопасным и предсказуемым.
+Flow analysis is an important aspect of code compilation and optimisation which is usually hidden from users but plays an important role in ensuring security and perfomance of programs.
 
-Вот пример использования анализа потока управления в Dart:
+&nbsp;
+
+Since Null Safety there has included flow analysis for providing type safety. This means that Dart compiler can now analyse code and understand what types may be at certain points. This allows compiler to catch potential null errors at compile time making the code safer and more predictable.
+
+&nbsp;
+
+Here is an example of using flow analysis in Dart:
 
 ```dart
 bool isEmptyList(Object object) {
   if (object is List) {
-    return object.isEmpty; // Анализ потока управления понимает, что object является List, и допускает вызов isEmpty.
+    return object.isEmpty; // Flow analysis reminds you that object's type is List and you can call isEmpty
   } else {
     return false;
   }
 }
 ```
 
-Обратите внимание, как на отмеченной строке мы можем вызвать isEmpty у Object. Этот метод определен в List, а не в Object. Это работает, потому что в Dart если в ветке if проверяется  тип c использованием ключевого слова is, и если это проверка вернет true нам будут доступны методы и свойства этого типа.С появлением Null Safety теперь подобные проверки можно делать и на null.Если в ветке проверяемый окажется не null, то мы вправе без явного приведения вызывать все его методы и свойства.
+Notice how on the marked line we can call `isEmpty` on `object`. This method is from List not from Object. This works because if we check type with key word `is`. And if this check will return true value then we will be able to call methods and fields of that type. Since Null Safety such checks are available. If check will not retrn null then we can call all object methods and fields without explicit casting.
 
 ```dart
 int stringLength1(String? stringOrNull) {
@@ -299,12 +347,15 @@ int stringLength2(String? stringOrNull) {
   return 0;
 }
 ```
+&nbsp;
 
 ## Late
 
-С появлением Null Safety в Dart появилось ключевое слово `late`, которое используется для отложенной инициализации переменных. Это означает, что вы можете объявить переменную и присвоить ей значение позже, чем она была объявлена. Основными случаями использования `late` являются:
+Since Null Safety there appeared new key word `late` in Dart which is using for lazy initialization. This means that you can now declare variable and assign a value to it later. The main uses of `late` are:
 
-### Использование `late` с полями класса:
+&nbsp;
+
+### Late final variables:
 
 ```dart
 class Coffee {
@@ -322,7 +373,9 @@ class Coffee {
 }
 ```
 
-### Отложенная инициализация (`lazy`):
+&nbsp;
+
+### Lazy initialization:
 
 ```dart
 class Weather {  
@@ -330,25 +383,35 @@ class Weather {
 }
 ```
 
-Когда вы так пишите, инициализация становится ленивой. То есть данное поле проинициализируется не при создании экземпляра класса, а при его непосредственном использовании.Это может быть полезно если мы имеем дело с трудоемкими операциями, вычисление которых хорошо бы отложить.
+When you do this, the initializer becomes lazy. Instead of running it as soon as the instance is constructed, it is deferred and run lazily the first time the field is accessed. 
 
-## Заключение
+&nbsp;
 
-Null Safety в Dart - это новая функциональность, введенная в язык программирования Dart, которая призвана предотвратить ошибки, связанные с отсутствием значения (null) в вашем коде. Эта функциональность включает в себя аннотации, которые позволяют объявить, будет ли переменная содержать null или нет. Это улучшает безопасность кода, так как многие ошибки, связанные с нулевыми указателями, могут быть обнаружены на этапе компиляции, а не во время выполнения программы.
+## Conclusion
 
-В итоге, использование Null Safety в Dart не только увеличивает надежность и безопасность вашего кода, но также помогает сделать разработку более эффективной и удовлетворительной, что делает эту функциональность важной частью современной разработки на этом языке.
+![](resource:assets/articles/resources/null_in_dart/offer.png)
 
-### Cсылки на материалы:
+Null Safety in Dart is a new functionality that intends to avoid null related errors in your code. This includes annotations that allows to specify if variable has null value or not. This improves code safety because many errors involving null pointers can be detected at compile time rather than during program execution.
 
-- **Статья "Null (programming)" на Википедии**:
+&nbsp;
+
+
+The bottom line is that using Null Safety in Dart not only increases the reliability and security of your code, but also helps make development more efficient and satisfying, making this functionality an important part of modern development in the language.
+
+&nbsp;
+
+### Usefull links:
+
+- **Article "Null (programming)" on Wikipedia*:
    [Null (programming)](https://en.wikipedia.org/wiki/Null_(programming))
-   Здесь вы найдете общую информацию о Null, его истории и использовании в различных языках программирования.
+   Here you can find common information about Null, it's history and usage in different programming languages.
 
-- **Статья "The billion dollar mistake"**:
+- **Presentation "The billion dollar mistake"**:
    [The billion dollar mistake](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/)
-   Это видео-презентация Тони Хоара, создателя Null, в которой он объясняет, почему Null был "миллиардным ошибкой" в программировании.
-
-- [Статья на Medium](https://medium.com/swlh/we-need-to-stop-using-null-heres-why-c56ff3ac72dd)
+   This is a video presentation by Tony Hoare - father of null.
+  
+- [Some article on  Medium](https://medium.com/swlh/we-need-to-stop-using-null-heres-why-c56ff3ac72dd)
 
 - [freeCodeCamp](https://www.freecodecamp.org/news/a-quick-and-thorough-guide-to-null-what-it-is-and-how-you-should-use-it-d170cea62840/)
-  Статья, более сильно погружающая в нутро null
+  Article which gives deeper explanation of null.
+****

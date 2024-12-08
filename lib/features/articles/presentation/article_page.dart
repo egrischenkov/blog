@@ -5,6 +5,7 @@ import 'package:blog/core/common/widgets/footer_widget.dart';
 import 'package:blog/features/home/domain/entities/article_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Page with article content.
@@ -24,6 +25,7 @@ class ArticlePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorsTheme = context.colorsTheme;
     final textTheme = context.textTheme;
+    final isDesktop = ResponsiveBreakpoints.of(context).isDesktop;
 
     return Scaffold(
       backgroundColor: colorsTheme.secondary,
@@ -52,7 +54,7 @@ class ArticlePage extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 128),
+              padding: EdgeInsets.symmetric(horizontal: isDesktop ? 128 : 16),
               child: MarkdownBody(
                 selectable: true,
                 data: articleEntity.articleInMarkdown,

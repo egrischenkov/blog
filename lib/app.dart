@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 const _title = 'Grischenkov\'s BLOG';
 
@@ -25,6 +26,20 @@ class App extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: _title,
+            builder: (context, child) {
+              if (child != null) {
+                return ResponsiveBreakpoints.builder(
+                  child: child,
+                  breakpoints: [
+                    const Breakpoint(start: 361, end: 800, name: MOBILE),
+                    const Breakpoint(start: 801, end: 1000, name: TABLET),
+                    const Breakpoint(start: 1001, end: 1920, name: DESKTOP),
+                  ],
+                );
+              }
+
+              return const SizedBox.shrink();
+            },
             home: HomePage(),
             theme: AppThemeData.lightTheme,
             darkTheme: AppThemeData.darkTheme,

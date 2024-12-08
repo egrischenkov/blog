@@ -12,6 +12,7 @@
     "homeTabTitle": "HOME",
     "aboutTabTitle": "ABOUT",
     "contentTabTitle": "CONTENT",
+    "homeMenu": "Menu",
     "@segmentSettings": {
         "---------": "---------",
         "description": "For Settings"

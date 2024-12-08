@@ -14,7 +14,6 @@ part 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   final IThemeService _themeService;
   final ILocaleService _localeService;
-  // ignore: unused_field
   final IHomeRepository _homeRepository;
 
   /// @nodoc

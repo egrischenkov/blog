@@ -59,7 +59,9 @@ class ArticlePage extends StatelessWidget {
                 onTapLink: (_, url, __) {
                   url != null ? launchUrl(Uri.parse(url)) : log('Url is null');
                 },
-                styleSheet: MarkdownStyleSheet(textScaleFactor: 1.5),
+                styleSheet: MarkdownStyleSheet(
+                  textScaler: const TextScaler.linear(1.5),
+                ),
               ),
             ),
           ),

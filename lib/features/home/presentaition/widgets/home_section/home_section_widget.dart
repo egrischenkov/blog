@@ -16,7 +16,7 @@ class HomeSectionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveBreakpoints.of(context).isDesktop
-        ? WebHomeSectionLayout(
+        ? DesktopHomeSectionLayout(
             parallaxOffsetX: _parallaxOffsetX,
             parallaxOffsetY: _parallaxOffsetY,
           )

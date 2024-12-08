@@ -3,8 +3,8 @@ import 'package:blog/core/common/extensions/build_context_extension.dart';
 import 'package:blog/core/utils/sized_box.dart';
 import 'package:flutter/material.dart';
 
-/// Web layout for home section.
-class WebHomeSectionLayout extends StatelessWidget {
+/// Desktop layout for home section.
+class DesktopHomeSectionLayout extends StatelessWidget {
   /// @nodoc.
   final double parallaxOffsetX;
 
@@ -12,7 +12,7 @@ class WebHomeSectionLayout extends StatelessWidget {
   final double parallaxOffsetY;
 
   /// @nodoc.
-  const WebHomeSectionLayout({
+  const DesktopHomeSectionLayout({
     required this.parallaxOffsetX,
     required this.parallaxOffsetY,
     super.key,
@@ -73,7 +73,9 @@ class WebHomeSectionLayout extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                Image.asset(AppImages.imgAvatar),
+                Image.asset(
+                  AppImages.imgAvatar,
+                ),
               ],
             ),
           ),

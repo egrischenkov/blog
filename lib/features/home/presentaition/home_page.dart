@@ -3,10 +3,11 @@ import 'package:blog/core/utils/intersperse.dart';
 import 'package:blog/core/utils/sized_box.dart';
 import 'package:blog/features/articles/presentation/article_page.dart';
 import 'package:blog/features/home/presentaition/widgets/articles_error_widget.dart';
+import 'package:blog/features/home/presentaition/widgets/articles_section/layouts/desktop_articles_section_layout.dart';
+import 'package:blog/features/home/presentaition/widgets/articles_section/layouts/table_and_mobile_articles_section_layout.dart';
 import 'package:blog/features/home/presentaition/widgets/home_section/layouts/tablet_and_mobile_home_section_layout.dart';
-import 'package:blog/features/home/presentaition/widgets/home_section/layouts/web_home_section_layout.dart';
+import 'package:blog/features/home/presentaition/widgets/home_section/layouts/desktop_home_section_layout.dart';
 import 'package:blog/features/home/presentaition/widgets/tab_item.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:blog/core/common/extensions/build_context_extension.dart';
 import 'package:blog/core/common/services/locale_service.dart/locale_code.dart';
 import 'package:blog/core/common/services/theme_service/theme_mode_extension.dart';
@@ -21,7 +22,7 @@ import 'package:shimmer/shimmer.dart';
 part 'package:blog/features/home/presentaition/widgets/tab_bar_widget.dart';
 part 'package:blog/features/home/presentaition/widgets/home_section/home_section_widget.dart';
 part 'package:blog/features/home/presentaition/widgets/about_section_widget.dart';
-part 'package:blog/features/home/presentaition/widgets/articles_section_widget.dart';
+part 'package:blog/features/home/presentaition/widgets/articles_section/articles_section_widget.dart';
 
 /// Typedef for parallax offset.
 typedef ParallaxOffset = (double, double);
@@ -148,8 +149,7 @@ class HomePage extends StatelessWidget {
                     floating: true,
                     backgroundColor: colorsTheme.background,
                     elevation: 5,
-                    // expandedHeight: ResponsiveBreakpoints.of(context).isTablet ? 300 : 150,
-                    expandedHeight: 150,
+                    expandedHeight: ResponsiveBreakpoints.of(context).isTablet ? 212 : 150,
                     flexibleSpace: FlexibleSpaceBar(
                       title: TabBarWidget(
                         scrollToItem: _scrollToItem,

@@ -15,22 +15,45 @@ class ArticlesSectionWidget extends StatelessWidget {
 
         final loading = state.status == HomeStatus.loading;
         final articles = state.articles;
-        return GridView.builder(
-          padding: const EdgeInsets.all(112),
-          shrinkWrap: true,
-          itemCount: loading ? 6 : articles.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            mainAxisSpacing: 32,
-            crossAxisSpacing: 32,
-          ),
-          itemBuilder: (_, index) {
-            if (loading) return const _ShimmerArticleWidget();
 
-            final item = articles[index];
-            return _ArticleWidget(key: ValueKey(item.articleInMarkdown), articleEntity: item);
-          },
-        );
+        final isDesktop = ResponsiveBreakpoints.of(context).isDesktop;
+
+        return isDesktop
+            ? GridView.builder(
+                padding: const EdgeInsets.all(112),
+                shrinkWrap: true,
+                itemCount: loading ? 6 : articles.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 32,
+                  crossAxisSpacing: 32,
+                ),
+                itemBuilder: (_, index) {
+                  if (loading) return const _ShimmerArticleWidget();
+
+                  final item = articles[index];
+                  return _ArticleWidget(
+                    key: ValueKey(item.articleInMarkdown),
+                    articleEntity: item,
+                  );
+                },
+              )
+            : ListView.separated(
+                shrinkWrap: true,
+                itemCount: loading ? 6 : articles.length,
+                itemBuilder: (_, index) {
+                  if (loading) return const _ShimmerArticleWidget();
+
+                  final item = articles[index];
+                  return _ArticleWidget(
+                    key: ValueKey(item.articleInMarkdown),
+                    articleEntity: item,
+                  );
+                },
+                separatorBuilder: (_, __) {
+                  return 16.h;
+                },
+              );
       },
     );
   }
@@ -58,48 +81,23 @@ class _ArticleWidgetState extends State<_ArticleWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final textTheme = context.textTheme;
-    final colorsScheme = context.colorsTheme;
+    final isDesktop = ResponsiveBreakpoints.of(context).isDesktop;
 
-    return MouseRegion(
-      onHover: (_) => _handleHover(hover: true),
-      onExit: (_) => _handleHover(hover: false),
-      child: GestureDetector(
-        onTap: () => _navigateToArticlePage(_articleEntity),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 100),
-          transform: Matrix4.translationValues(0, isHovered ? -8 : 0, 0),
-          height: 500,
-          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
-          decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage(_articleEntity.imagePath), fit: BoxFit.cover),
-            borderRadius: BorderRadius.circular(32),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                _articleEntity.title,
-                style: textTheme.bold24.copyWith(color: colorsScheme.onPrimary),
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 24),
-              Text(
-                _formatArticleCreationDate(_articleEntity.createdAt, l10n),
-                style: textTheme.bold16.copyWith(color: colorsScheme.onPrimary),
-              ),
-              const Spacer(),
-              Text(
-                _articleEntity.topic,
-                style: textTheme.bold16.copyWith(color: colorsScheme.onPrimary),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+    return isDesktop
+        ? DesktopArticlesSectionLayout(
+            article: _articleEntity,
+            isHovered: isHovered,
+            formatCreationDate: _formatArticleCreationDate,
+            navigateToArticlePage: _navigateToArticlePage,
+            handleHover: _handleHover,
+          )
+        : TableAndMobileArticlesSectionLayout(
+            article: _articleEntity,
+            isHovered: isHovered,
+            formatCreationDate: _formatArticleCreationDate,
+            navigateToArticlePage: _navigateToArticlePage,
+            handleHover: _handleHover,
+          );
   }
 
   void _navigateToArticlePage(ArticleEntity articleEntity) {
@@ -110,13 +108,14 @@ class _ArticleWidgetState extends State<_ArticleWidget> {
     );
   }
 
-  void _handleHover({required bool hover}) {
+  void _handleHover(bool hover) {
     setState(() {
       isHovered = hover;
     });
   }
 
-  String _formatArticleCreationDate(DateTime articleDate, AppLocalizations l10n) {
+  String _formatArticleCreationDate(DateTime articleDate) {
+    final l10n = context.l10n;
     final currentDate = DateTime.now();
 
     final difference = currentDate.difference(articleDate);

@@ -1,9 +1,10 @@
-import 'package:blog/core/assets/res/resources.dart';
 import 'package:blog/core/common/widgets/footer_widget.dart';
 import 'package:blog/core/utils/intersperse.dart';
 import 'package:blog/core/utils/sized_box.dart';
 import 'package:blog/features/articles/presentation/article_page.dart';
 import 'package:blog/features/home/presentaition/widgets/articles_error_widget.dart';
+import 'package:blog/features/home/presentaition/widgets/home_section/layouts/tablet_and_mobile_home_section_layout.dart';
+import 'package:blog/features/home/presentaition/widgets/home_section/layouts/web_home_section_layout.dart';
 import 'package:blog/features/home/presentaition/widgets/tab_item.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:blog/core/common/extensions/build_context_extension.dart';
@@ -18,7 +19,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shimmer/shimmer.dart';
 
 part 'package:blog/features/home/presentaition/widgets/tab_bar_widget.dart';
-part 'package:blog/features/home/presentaition/widgets/home_section_widget.dart';
+part 'package:blog/features/home/presentaition/widgets/home_section/home_section_widget.dart';
 part 'package:blog/features/home/presentaition/widgets/about_section_widget.dart';
 part 'package:blog/features/home/presentaition/widgets/articles_section_widget.dart';
 

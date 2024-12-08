@@ -1,17 +1,22 @@
-part of 'package:blog/features/home/presentaition/home_page.dart';
+import 'package:blog/core/assets/res/resources.dart';
+import 'package:blog/core/common/extensions/build_context_extension.dart';
+import 'package:blog/core/utils/sized_box.dart';
+import 'package:flutter/material.dart';
 
-/// Widget with main photo and short self description.
-class HomeSectionWidget extends StatelessWidget {
-  final double _parallaxOffsetX;
-  final double _parallaxOffsetY;
+/// Web layout for home section.
+class WebHomeSectionLayout extends StatelessWidget {
+  /// @nodoc.
+  final double parallaxOffsetX;
 
-  /// @nodoc
-  const HomeSectionWidget({
-    required double parallaxOffsetX,
-    required double parallaxOffsetY,
+  /// @nodoc.
+  final double parallaxOffsetY;
+
+  /// @nodoc.
+  const WebHomeSectionLayout({
+    required this.parallaxOffsetX,
+    required this.parallaxOffsetY,
     super.key,
-  })  : _parallaxOffsetY = parallaxOffsetY,
-        _parallaxOffsetX = parallaxOffsetX;
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +30,11 @@ class HomeSectionWidget extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Transform(
-            transform: Matrix4.translationValues(_parallaxOffsetX, _parallaxOffsetY, 0),
+            transform: Matrix4.translationValues(
+              parallaxOffsetX,
+              parallaxOffsetY,
+              0,
+            ),
             child: Image.asset(
               AppImages.imgHomeBackground,
               fit: BoxFit.cover,
@@ -51,11 +60,11 @@ class HomeSectionWidget extends StatelessWidget {
                         l10n.homeSectionGreating,
                         style: textTheme.bold22.copyWith(color: colorsTheme.accent),
                       ),
-                      const SizedBox(height: 16),
+                      16.h,
                       Text(l10n.homeSectionName, style: textTheme.bold24),
-                      const SizedBox(height: 8),
+                      8.h,
                       Text(l10n.homeSectionSurname, style: textTheme.bold24),
-                      const SizedBox(height: 16),
+                      16.h,
                       Text(
                         l10n.homeSectionSelfDescription,
                         style: textTheme.bold14.copyWith(color: colorsTheme.inactive),
